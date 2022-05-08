@@ -21,6 +21,7 @@ Imports:
     rappdirs (>= 0.3.0),
 Suggests: 
     covr,
+    rsvg (>= 2.0),
     testthat (>= 3.0.0),
     vdiffr (>= 1.0.2)
 Config/testthat/edition: 3
