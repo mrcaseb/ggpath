@@ -6,7 +6,8 @@ Authors@R:
 Description: A 'ggplot2' extension that enables robust image grobs in
     panels and theme elements.
 License: MIT + file LICENSE
-URL: https://github.com/mrcaseb/ggpath
+URL: https://github.com/mrcaseb/ggpath,
+    https://mrcaseb.github.io/ggpath/
 BugReports: https://github.com/mrcaseb/ggpath/issues
 Depends: 
     R (>= 3.5.0)
