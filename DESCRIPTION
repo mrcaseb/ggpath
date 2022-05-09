@@ -19,8 +19,9 @@ Imports:
     magick (>= 2.7.3),
     memoise (>= 2.0.0),
     rappdirs (>= 0.3.0),
+    rlang (= 0.4.11)
 Suggests: 
-    covr,
+    covr (>= 3.5.1),
     rsvg (>= 2.0),
     testthat (>= 3.0.0),
     vdiffr (>= 1.0.2)

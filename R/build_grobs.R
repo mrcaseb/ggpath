@@ -1,5 +1,6 @@
-# INTERNAL HELPER THAT BUILDS THE GROBS FOR GeomFromPath
-build_grobs <- function(i, alpha, colour, path, data) {
+# INTERNAL HELPER THAT BUILDS THE GROBS FOR GeomFromPath and element_path
+build_grobs <- function(i, alpha, colour, path, data,
+                        is_theme_element = FALSE) {
   img <- try(reader_function(path[i]), silent = TRUE)
 
   if (inherits(img, "try-error")) cli::cli_abort(img)
@@ -15,18 +16,35 @@ build_grobs <- function(i, alpha, colour, path, data) {
     modified_img <- resolve_img_color(img = modified_img, col = colour[i])
   }
 
-  grid::rasterGrob(
-    modified_img,
-    vp = grid::viewport(
-      x = grid::unit(data$x[i], "native"),
-      y = grid::unit(data$y[i], "native"),
-      width = grid::unit(data$width[i], "npc"),
-      height = grid::unit(data$height[i], "npc"),
+  # theme elements require justification outside the viewport
+  # so we have to do this twice here
+  if(isFALSE(is_theme_element)){
+    grid::rasterGrob(
+      modified_img,
+      vp = grid::viewport(
+        x = grid::unit(data$x[i], "native"),
+        y = grid::unit(data$y[i], "native"),
+        width = grid::unit(data$width[i], "npc"),
+        height = grid::unit(data$height[i], "npc"),
+        just = c(data$hjust[i], data$vjust[i]),
+        angle = data$angle[i]
+      ),
+      name = paste0("ggpath.grob.", i)
+    )
+  } else if (isTRUE(is_theme_element)){
+    grid::rasterGrob(
+      modified_img,
+      vp = grid::viewport(
+        x = grid::unit(data$x[i], "npc"),
+        y = grid::unit(data$y[i], "npc"),
+        width = grid::unit(data$width[i], "npc"),
+        height = grid::unit(data$height[i], "npc"),
+        angle = data$angle[i]
+      ),
       just = c(data$hjust[i], data$vjust[i]),
-      angle = data$angle[i]
-    ),
-    name = paste0("ggpath.grob.", i)
-  )
+      name = paste0("ggpath.grob.", i)
+    )
+  }
 }
 
 # decides if we should read with dedicated svg reader or not

@@ -19,6 +19,7 @@ A 'ggplot2' extension that enables robust image grobs in panels and theme elemen
 Useful links:
 \itemize{
   \item \url{https://github.com/mrcaseb/ggpath}
+  \item \url{https://mrcaseb.github.io/ggpath/}
   \item Report bugs at \url{https://github.com/mrcaseb/ggpath/issues}
 }
 
