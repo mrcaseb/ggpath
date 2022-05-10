@@ -122,9 +122,11 @@ GeomRefLines <- ggplot2::ggproto("GeomRefLines", ggplot2::Geom,
     # x and y are already transformed if any kind of transformation is required,
     # e.g. trans = "reverse". Without transformation, x/v_var and y/h_var are
     # identical.
+    # This approach does not work if h_var or v_var are set to a constant value
+    # by the user. Therefore we check the number of unique values.
     vars <- names(data)
-    if ("v_var" %in% vars) data$v_var <- data$x
-    if ("h_var" %in% vars) data$h_var <- data$y
+    if ("v_var" %in% vars && length(unique(data$v_var)) > 1) data$v_var <- data$x
+    if ("h_var" %in% vars && length(unique(data$h_var)) > 1) data$h_var <- data$y
     data
   },
 
