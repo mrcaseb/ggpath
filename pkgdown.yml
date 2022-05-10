@@ -1,8 +1,8 @@
-pandoc: 2.17.1.1
+pandoc: 2.7.3
 pkgdown: 2.0.3
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-05-10T13:34Z
+last_built: 2022-05-10T14:20Z
 urls:
   reference: https://mrcaseb.github.io/ggpath/reference
   article: https://mrcaseb.github.io/ggpath/articles
