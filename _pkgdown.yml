@@ -1,4 +1,15 @@
 url: https://mrcaseb.github.io/ggpath/
+authors:
+  Sebastian Carl:
+    href: https://twitter.com/mrcaseb
 template:
   bootstrap: 5
+  bootswatch: materia
+  bslib:
+    font_scale: 1.1
+    base_font: {google: "IBM Plex Sans"}
+    heading_font: {google: "Kanit"}
+    code_font: {google: "Fira Code"}
+navbar:
+  bg: dark
 

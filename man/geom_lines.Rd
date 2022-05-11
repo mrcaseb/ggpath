@@ -67,7 +67,7 @@ created with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 \description{
 These geoms can be used to draw horizontal or vertical reference
 lines in a ggplot. They use the data in the aesthetics \code{x0} and \code{y0}
-to compute their \code{median} or \code{mean} and draw the as a line.
+to compute their \code{median} or \code{mean} and draw them as a line.
 }
 \section{Aesthetics}{
 

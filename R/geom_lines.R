@@ -2,7 +2,7 @@
 #'
 #' @description These geoms can be used to draw horizontal or vertical reference
 #'   lines in a ggplot. They use the data in the aesthetics `x0` and `y0`
-#'   to compute their `median` or `mean` and draw the as a line.
+#'   to compute their `median` or `mean` and draw them as a line.
 #'
 #' @inheritParams ggplot2::geom_hline
 #' @param inherit.aes If `FALSE`, overrides the default aesthetics,
