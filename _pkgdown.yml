@@ -6,10 +6,11 @@ template:
   bootstrap: 5
   bootswatch: materia
   bslib:
-    # font_scale: 1.1
+    font_scale: 1.1
     base_font: {google: "IBM Plex Sans"}
     heading_font: {google: "Kanit"}
     code_font: {google: "Fira Code"}
+    pkgdown-nav-height: 100px
 navbar:
   bg: dark
   structure:
