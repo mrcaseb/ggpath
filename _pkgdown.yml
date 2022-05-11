@@ -12,4 +12,11 @@ template:
     code_font: {google: "Fira Code"}
 navbar:
   bg: dark
+   structure:
+    left:  [home, intro, reference, news, articles]
+    right: [github]
+  components:
+    reference:
+      text: "Functions"
+      href: reference/index.html
 
