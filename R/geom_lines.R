@@ -1,7 +1,7 @@
 #' ggplot2 Layer for Horizontal and Vertical Reference Lines
 #'
 #' @description These geoms can be used to draw horizontal or vertical reference
-#'   lines in a ggplot. They use the data in the aesthetics `v_var` and `h_var`
+#'   lines in a ggplot. They use the data in the aesthetics `x0` and `y0`
 #'   to compute their `median` or `mean` and draw the as a line.
 #'
 #' @inheritParams ggplot2::geom_hline
@@ -13,8 +13,8 @@
 #' `geom_median_lines()` and `geom_mean_lines()` understand the following
 #' aesthetics (at least one of the bold aesthetics is required):
 #' \itemize{
-#'   \item{**v_var**}{ - The variable for which to compute the median/mean that is drawn as vertical line.}
-#'   \item{**h_var**}{ - The variable for which to compute the median/mean that is drawn as horizontal line.}
+#'   \item{**x0**}{ - The variable for which to compute the median/mean that is drawn as vertical line.}
+#'   \item{**y0**}{ - The variable for which to compute the median/mean that is drawn as horizontal line.}
 #'   \item{`alpha = NA`}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 #'   \item{`color = "red"`}{ - The color of the drawn lines.}
 #'   \item{`linetype = 2`}{ - The linetype of the drawn lines.}
@@ -29,21 +29,21 @@
 #' library(ggplot2)
 #'
 #' # inherit top level aesthetics
-#' ggplot(mtcars, aes(x = disp, y = mpg, h_var = mpg, v_var = disp)) +
+#' ggplot(mtcars, aes(x = disp, y = mpg, y0 = mpg, x0 = disp)) +
 #'   geom_point() +
 #'   geom_median_lines() +
 #'   geom_mean_lines(color = "blue") +
 #'   theme_minimal()
 #'
 #' # draw horizontal line only
-#' ggplot(mtcars, aes(x = disp, y = mpg, h_var = mpg)) +
+#' ggplot(mtcars, aes(x = disp, y = mpg, y0 = mpg)) +
 #'   geom_point() +
 #'   geom_median_lines() +
 #'   geom_mean_lines(color = "blue") +
 #'   theme_minimal()
 #'
 #' # draw vertical line only
-#' ggplot(mtcars, aes(x = disp, y = mpg, v_var = disp)) +
+#' ggplot(mtcars, aes(x = disp, y = mpg, x0 = disp)) +
 #'   geom_point() +
 #'   geom_median_lines() +
 #'   geom_mean_lines(color = "blue") +
@@ -52,8 +52,8 @@
 #' # choose your own value
 #' ggplot(mtcars, aes(x = disp, y = mpg)) +
 #'   geom_point() +
-#'   geom_median_lines(v_var = 400, h_var = 15) +
-#'   geom_mean_lines(v_var = 150, h_var = 30, color = "blue") +
+#'   geom_median_lines(x0 = 400, y0 = 15) +
+#'   geom_mean_lines(x0 = 150, y0 = 30, color = "blue") +
 #'   theme_minimal()
 NULL
 
@@ -109,61 +109,44 @@ geom_mean_lines <- function(mapping = NULL, data = NULL,
 #' @export
 GeomRefLines <- ggplot2::ggproto("GeomRefLines", ggplot2::Geom,
 
-  optional_aes = c("v_var", "h_var"),
+  optional_aes = c("x0", "y0"),
 
   default_aes = ggplot2::aes(colour = "red", size = 0.5, linetype = 2, alpha = NA),
-
-  setup_data = function(data, params){
-    # This step is important for transformations. ggplot2 transforms aesthetics
-    # that are included in the ggplot2 environments ggplot_global$x_aes and
-    # ggplot_global$y_aes. We can't modify that environment so we need to
-    # modify our data here.
-    # That's why this step overwrites v_var and h_var with x and y. These
-    # x and y are already transformed if any kind of transformation is required,
-    # e.g. trans = "reverse". Without transformation, x/v_var and y/h_var are
-    # identical.
-    # This approach does not work if h_var or v_var are set to a constant value
-    # by the user. Therefore we check the number of unique values.
-    vars <- names(data)
-    if ("v_var" %in% vars && length(unique(data$v_var)) > 1) data$v_var <- data$x
-    if ("h_var" %in% vars && length(unique(data$h_var)) > 1) data$h_var <- data$y
-    data
-  },
 
   draw_panel = function(data, panel_params, coord, ref_function, na.rm = FALSE) {
     args <- names(data)
 
-    # Can't do anything if either of h_var and v_var are aesthetics
-    if (all(!c("v_var", "h_var") %in% args)) {
-      cli::cli_abort("{.var geom_median_lines()} and {.var geom_mean_lines()} require at least one of the following aesthetics: {.var v_var}, {.var h_var}")
+    # Can't do anything if either of y0 and x0 are aesthetics
+    if (all(!c("x0", "y0") %in% args)) {
+      cli::cli_abort("{.var geom_median_lines()} and {.var geom_mean_lines()} require at least one of the following aesthetics: {.var x0}, {.var y0}")
     }
 
-    # Since h_var and v_var can be in data, it is necessary to select only
+    # Since y0 and x0 can be in data, it is necessary to select only
     # those variables that are required for the underlying Geoms to work.
     # This could also be achieved by setting inherit.aes to FALSE explicitly but
     # I want to be able to inherit aesthetics so I had to do this differently.
     relevant_columns <- c("PANEL", "group", "colour", "size", "linetype", "alpha")
 
-    # if v_var and/or h_var are present in data we have to compute the relevant
+    # if x0 and/or y0 are present in data we have to compute the relevant
     # xintercept and yintercept variables and drop anything irrelevant from data
     # as the underlying Geoms will draw multiple lines if there are multiple
     # unique rows. This caused alpha to not work properly because the geom draws
     # many opaque lines which outputs as non-opaque lines.
-    if ("v_var" %in% args){
+    if ("x0" %in% args){
       data_v <- data
-      data_v$xintercept <- ref_function(data_v$v_var, na.rm = na.rm)
+      data_v$xintercept <- ref_function(data_v$x0, na.rm = na.rm)
       data_v <- data_v[,c("xintercept", relevant_columns)]
     }
 
-    if ("h_var" %in% args){
+    if ("y0" %in% args){
       data_h <- data
-      data_h$yintercept <- ref_function(data_h$h_var, na.rm = na.rm)
+      data_h$yintercept <- ref_function(data_h$y0, na.rm = na.rm)
       data_h <- data_h[,c("yintercept", relevant_columns)]
     }
 
-    if (!"v_var" %in% args) {
+    if (!"x0" %in% args) {
       ggplot2::GeomHline$draw_panel(data_h, panel_params, coord)
-    } else if (!"h_var" %in% args) {
+    } else if (!"y0" %in% args) {
       ggplot2::GeomVline$draw_panel(data_v, panel_params, coord)
     } else {
       grid::gList(

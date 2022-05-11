@@ -11,7 +11,7 @@
 \format{
 An object of class \code{GeomFromPath} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 
-An object of class \code{GeomRefLines} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 6.
+An object of class \code{GeomRefLines} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 }
 \usage{
 GeomFromPath

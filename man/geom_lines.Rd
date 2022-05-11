@@ -66,7 +66,7 @@ created with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \description{
 These geoms can be used to draw horizontal or vertical reference
-lines in a ggplot. They use the data in the aesthetics \code{v_var} and \code{h_var}
+lines in a ggplot. They use the data in the aesthetics \code{x0} and \code{y0}
 to compute their \code{median} or \code{mean} and draw the as a line.
 }
 \section{Aesthetics}{
@@ -74,8 +74,8 @@ to compute their \code{median} or \code{mean} and draw the as a line.
 \code{geom_median_lines()} and \code{geom_mean_lines()} understand the following
 aesthetics (at least one of the bold aesthetics is required):
 \itemize{
-\item{\strong{v_var}}{ - The variable for which to compute the median/mean that is drawn as vertical line.}
-\item{\strong{h_var}}{ - The variable for which to compute the median/mean that is drawn as horizontal line.}
+\item{\strong{x0}}{ - The variable for which to compute the median/mean that is drawn as vertical line.}
+\item{\strong{y0}}{ - The variable for which to compute the median/mean that is drawn as horizontal line.}
 \item{\code{alpha = NA}}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 \item{\code{color = "red"}}{ - The color of the drawn lines.}
 \item{\code{linetype = 2}}{ - The linetype of the drawn lines.}
@@ -87,21 +87,21 @@ aesthetics (at least one of the bold aesthetics is required):
 library(ggplot2)
 
 # inherit top level aesthetics
-ggplot(mtcars, aes(x = disp, y = mpg, h_var = mpg, v_var = disp)) +
+ggplot(mtcars, aes(x = disp, y = mpg, y0 = mpg, x0 = disp)) +
   geom_point() +
   geom_median_lines() +
   geom_mean_lines(color = "blue") +
   theme_minimal()
 
 # draw horizontal line only
-ggplot(mtcars, aes(x = disp, y = mpg, h_var = mpg)) +
+ggplot(mtcars, aes(x = disp, y = mpg, y0 = mpg)) +
   geom_point() +
   geom_median_lines() +
   geom_mean_lines(color = "blue") +
   theme_minimal()
 
 # draw vertical line only
-ggplot(mtcars, aes(x = disp, y = mpg, v_var = disp)) +
+ggplot(mtcars, aes(x = disp, y = mpg, x0 = disp)) +
   geom_point() +
   geom_median_lines() +
   geom_mean_lines(color = "blue") +
@@ -110,8 +110,8 @@ ggplot(mtcars, aes(x = disp, y = mpg, v_var = disp)) +
 # choose your own value
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point() +
-  geom_median_lines(v_var = 400, h_var = 15) +
-  geom_mean_lines(v_var = 150, h_var = 30, color = "blue") +
+  geom_median_lines(x0 = 400, y0 = 15) +
+  geom_mean_lines(x0 = 150, y0 = 30, color = "blue") +
   theme_minimal()
 }
 \seealso{
