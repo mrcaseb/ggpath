@@ -31,35 +31,26 @@
 #'   created with [ggplot2::ggplot()].
 #' @export
 #' @examples
-#' \donttest{
 #' library(ggplot2)
 #' library(ggpath)
 #'
-#' # create x-y-coordinates of a pentagon and add nflverse logo urls
-#' df <- data.frame(
-#'   a = c(sin(2 * pi * (0:4) / 5), 0),
-#'   b = c(cos(2 * pi * (0:4) / 5), 0),
-#'   url = c(
-#'     "https://github.com/nflverse/nflfastR/raw/master/man/figures/logo.png",
-#'     "https://github.com/nflverse/nflseedR/raw/master/man/figures/logo.png",
-#'     "https://github.com/nflverse/nfl4th/raw/master/man/figures/logo.png",
-#'     "https://github.com/nflverse/nflreadr/raw/main/data-raw/logo.svg",
-#'     "https://github.com/nflverse/nflplotR/raw/main/man/figures/logo.png",
-#'     "https://github.com/nflverse/nflverse/raw/main/man/figures/logo.png"
-#'   )
-#' )
+#' # compute path of an R logo file shipped with ggpath
+#' local_image_path <- system.file("r_logo.png", package = "ggpath")
 #'
-#' # plot images directly from url
-#' ggplot(df, aes(x = a, y = b)) +
-#'   geom_from_path(aes(path = url), width = 0.15) +
-#'   coord_cartesian(xlim = c(-2, 2), ylim = c(-1.3, 1.5)) +
-#'   theme_void()
+#' # create dataframe with x-y-coordinates and the above local path
+#' plot_data <- data.frame(x = c(-1, 1), y = 1, path = local_image_path)
 #'
-#' # plot images directly from url and apply transparency
-#' ggplot(df, aes(x = a, y = b)) +
-#'   geom_from_path(aes(path = url), width = 0.15, alpha = 0.5) +
-#'   coord_cartesian(xlim = c(-2, 2), ylim = c(-1.3, 1.5)) +
-#'   theme_void()
+#' # plot images directly from local path
+#' ggplot(plot_data, aes(x = x, y = y)) +
+#'   geom_from_path(aes(path = path), width = 0.2) +
+#'   coord_cartesian(xlim = c(-2, 2)) +
+#'   theme_minimal()
+#'
+#' # plot images directly from local path and apply transparency
+#' ggplot(plot_data, aes(x = x, y = y)) +
+#'   geom_from_path(aes(path = path), width = 0.2, alpha = 0.5) +
+#'   coord_cartesian(xlim = c(-2, 2)) +
+#'   theme_minimal()
 #'
 #' # It is also possible and recommended to use the underlying Geom inside a
 #' # ggplot2 annotation
@@ -68,11 +59,10 @@
 #'     ggpath::GeomFromPath,
 #'     x = 0,
 #'     y = 0,
-#'     path = "https://github.com/nflverse/nflplotR/raw/main/man/figures/logo.png",
+#'     path = local_image_path,
 #'     width = 0.4
 #'   ) +
 #'   theme_minimal()
-#' }
 geom_from_path <- function(mapping = NULL, data = NULL,
                            stat = "identity", position = "identity",
                            ...,

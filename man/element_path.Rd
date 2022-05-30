@@ -39,35 +39,34 @@ enables images in non-data components of the plot, e.g. axis text. It draws
 images from valid image URLs, raster objects, or bitmap arrays.
 }
 \examples{
-\donttest{
 library(ggplot2)
+library(ggpath)
 
-df <- dplyr::mutate(mtcars,
-  team = sample(c("LAC", "BUF", "DAL", "ARI"), nrow(mtcars), TRUE),
-  player = sample(
-  c("00-0033873", "00-0035228", "00-0036355", "00-0019596"),
-  nrow(mtcars),
-  TRUE
-  )
-)
+# compute path of an R logo file shipped with ggpath
+local_image_path <- system.file("r_logo.svg", package = "ggpath")
 
-ggplot(df, aes(x = mpg, y = disp)) +
-  geom_point() +
-  facet_wrap(vars(team)) +
-  labs(
-    title = tools::toTitleCase("These are random teams and data"),
-    subtitle = "I just want to show how the nflplotR theme elements work",
-    caption = "https://github.com/nflverse/nflseedR/raw/master/man/figures/caption.png"
-  ) +
+# create dataframe with x-y-coordinates and the above local path
+plot_data <- data.frame(x = c(-1, 1), y = 1, path = local_image_path)
+
+# Replace title, subtitle, the caption, axis labels as well as y-axis text
+# the the local image
+ggplot(plot_data, aes(x = x, y = local_image_path)) +
   theme_minimal() +
+  labs(
+    title = local_image_path,
+    subtitle = local_image_path,
+    x = local_image_path,
+    y = local_image_path,
+    caption = local_image_path
+  ) +
   theme(
-    plot.title.position = "plot",
-    plot.title = element_text(face = "bold"),
-    axis.title = element_blank(),
-    # load image from url in caption
-    plot.caption = element_path(hjust = 1, size = 0.4)
+    plot.caption = element_path(hjust = 1, size = 0.6),
+    axis.text.y = element_path(size = 1),
+    axis.title.x = element_path(),
+    axis.title.y = element_path(vjust = 0.9),
+    plot.title = element_path(hjust = 0, size = 2, alpha = 0.5),
+    plot.subtitle = element_path(hjust = 0.9, angle = 45),
   )
-}
 }
 \seealso{
 \code{\link[=geom_from_path]{geom_from_path()}} for more information.
