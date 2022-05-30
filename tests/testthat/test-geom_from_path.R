@@ -1,23 +1,17 @@
 test_that("geom from path works", {
-  # skip this on cran because we load images from github which could fail
-  skip_on_cran()
-
   library(ggplot2)
 
-  # create x-y-coordinates of a pentagon and add nflverse logo urls
-  df <- data.frame(
-    a = sin(2 * pi * (0) / 5),
-    b = cos(2 * pi * (0) / 5),
-    url = c(
-      "https://github.com/nflverse/nflseedR/raw/master/man/figures/logo.png"
-    )
-  )
+  # compute path of an R logo file shipped with ggpath
+  local_image_path <- system.file("r_logo.png", package = "ggpath")
 
-  # plot images directly from url and apply transparency
-  p1 <- ggplot(df, aes(x = a, y = b)) +
-    geom_from_path(aes(path = url), width = 0.1, alpha = 0.5) +
-    coord_cartesian(xlim = c(-2, 2), ylim = c(-1.3, 1.5)) +
-    theme_void()
+  # create dataframe with x-y-coordinates and the above local path
+  plot_data <- data.frame(x = c(-1, 1), y = 1, path = local_image_path)
+
+  # plot images directly from local path and apply transparency
+  p1 <- ggplot(plot_data, aes(x = x, y = y)) +
+    geom_from_path(aes(path = path), width = 0.2, alpha = 0.5) +
+    coord_cartesian(xlim = c(-2, 2)) +
+    theme_minimal()
 
   vdiffr::expect_doppelganger("p1", p1)
 })
