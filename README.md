@@ -9,39 +9,81 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggpath)](https://CRAN.R-project.org/package=ggpath)
+[![Codecov test
+coverage](https://codecov.io/gh/mrcaseb/ggpath/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mrcaseb/ggpath?branch=main)
+[![R-CMD-check](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of ggpath is to …
+ggpath is a ‘ggplot2’ extension that enables robust image grobs in
+panels and theme elements. This means it helps plotting images (from
+local paths, from urls or from raw image data) in nearly every part of a
+ggplot.
 
 ## Installation
 
-You can install the development version of ggpath like so:
+Until ggpath is available on CRAN, the only way to install it is from
+[GitHub](https://github.com/mrcaseb/ggpath), for example with:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+if (!require("pak")) install.packages("pak")
+pak::pak("mrcaseb/ggpath")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+The two main features to provide images in a ggplot are a geom
+(geom_from_path) and a theme element (element_path). Both replace image
+urls, local image paths, or raw image data with the actual image. And to
+improve performance, the images are cached locally.
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+The below examples use local image files that are shipped with the
+package. Let’s locate the images first.
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
+``` r
+local_image_path <- system.file("r_logo.png", package = "ggpath")
+```
 
-You can also embed plots, for example:
+Now, we can make a simple plot, where we use the image like a point by
+replacing the local path with the actual image.
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+``` r
+library(ggplot2)
+library(ggpath)
+plot_data <- data.frame(x = c(-1, 1), y = 1, path = local_image_path)
+ggplot(plot_data, aes(x = x, y = y)) +
+  geom_from_path(aes(path = path), width = 0.2) +
+  coord_cartesian(xlim = c(-2, 2)) +
+  theme_minimal()
+```
 
-## Code of Conduct
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
-Please note that the ggpath project is released with a [Contributor Code
-of
-Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+We can build on top of that by adding new axis labels, axis titles, plot
+title and subtitle, or a caption and using the ggpath theme element.
+Note the usage of transparency with the `alpha` argument, the
+justification with the `hjust`/`vjust` arguments, or the rotation with
+the `angle` argument.
+
+``` r
+ggplot(plot_data, aes(x = x, y = local_image_path)) +
+  geom_from_path(aes(path = path), width = 0.2, alpha = 0.2) +
+  coord_cartesian(xlim = c(-2, 2)) +
+  theme_minimal() +
+  labs(
+    title = local_image_path,
+    subtitle = local_image_path,
+    x = local_image_path,
+    y = local_image_path,
+    caption = local_image_path
+  ) +
+  theme(
+    plot.caption = element_path(hjust = 1, size = 0.6),
+    axis.text.y = element_path(size = 1),
+    axis.title.x = element_path(),
+    axis.title.y = element_path(vjust = 0.9),
+    plot.title = element_path(hjust = 0, size = 2, alpha = 0.5),
+    plot.subtitle = element_path(hjust = 0.9, angle = 45),
+  )
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
