@@ -94,36 +94,35 @@ Must be a numerical value between 0 and 1.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mrcaseb/ggpath" class="external-link">ggpath</a></span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">mtcars</span>,</span>
-<span class="r-in">  team <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"LAC"</span>, <span class="st">"BUF"</span>, <span class="st">"DAL"</span>, <span class="st">"ARI"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span class="r-in">  player <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"00-0033873"</span>, <span class="st">"00-0035228"</span>, <span class="st">"00-0036355"</span>, <span class="st">"00-0019596"</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="cn">TRUE</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span class="co"># compute path of an R logo file shipped with ggpath</span></span>
+<span class="r-in"><span class="va">local_image_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"r_logo.svg"</span>, package <span class="op">=</span> <span class="st">"ggpath"</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mpg</span>, y <span class="op">=</span> <span class="va">disp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">team</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span class="r-in">    title <span class="op">=</span> <span class="fu">tools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tools/toTitleCase.html" class="external-link">toTitleCase</a></span><span class="op">(</span><span class="st">"These are random teams and data"</span><span class="op">)</span>,</span>
-<span class="r-in">    subtitle <span class="op">=</span> <span class="st">"I just want to show how the nflplotR theme elements work"</span>,</span>
-<span class="r-in">    caption <span class="op">=</span> <span class="st">"https://github.com/nflverse/nflseedR/raw/master/man/figures/caption.png"</span></span>
-<span class="r-in">  <span class="op">)</span> <span class="op">+</span></span>
+<span class="r-in"><span class="co"># create dataframe with x-y-coordinates and the above local path</span></span>
+<span class="r-in"><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">1</span>, path <span class="op">=</span> <span class="va">local_image_path</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Replace title, subtitle, the caption, axis labels as well as y-axis text</span></span>
+<span class="r-in"><span class="co"># the the local image</span></span>
+<span class="r-in"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">plot_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">local_image_path</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span class="r-in">    title <span class="op">=</span> <span class="va">local_image_path</span>,</span>
+<span class="r-in">    subtitle <span class="op">=</span> <span class="va">local_image_path</span>,</span>
+<span class="r-in">    x <span class="op">=</span> <span class="va">local_image_path</span>,</span>
+<span class="r-in">    y <span class="op">=</span> <span class="va">local_image_path</span>,</span>
+<span class="r-in">    caption <span class="op">=</span> <span class="va">local_image_path</span></span>
+<span class="r-in">  <span class="op">)</span> <span class="op">+</span></span>
 <span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span class="r-in">    plot.title.position <span class="op">=</span> <span class="st">"plot"</span>,</span>
-<span class="r-in">    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
-<span class="r-in">    axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="co"># load image from url in caption</span></span>
-<span class="r-in">    plot.caption <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span>
+<span class="r-in">    plot.caption <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span>,</span>
+<span class="r-in">    axis.text.y <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span class="r-in">    axis.title.x <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span><span class="op">)</span>,</span>
+<span class="r-in">    axis.title.y <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span>vjust <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span class="r-in">    plot.title <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">2</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span class="r-in">    plot.subtitle <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.9</span>, angle <span class="op">=</span> <span class="fl">45</span><span class="op">)</span>,</span>
 <span class="r-in">  <span class="op">)</span></span>
 <span class="r-plt img"><img src="element_path-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
