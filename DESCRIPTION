@@ -22,7 +22,6 @@ Imports:
     rlang (>= 0.4.11)
 Suggests: 
     covr (>= 3.5.1),
-    dplyr (>= 1.0),
     rsvg (>= 2.0),
     testthat (>= 3.0.0),
     vdiffr (>= 1.0.2)
