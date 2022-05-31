@@ -19,7 +19,7 @@ panels and theme elements. This means it helps plotting images (from
 local paths, from urls or from raw image data) in nearly every part of a
 ggplot.
 
-## What is the Difference to Other Image Related ggplot2 Extensions
+## What is the Difference to Other Image Related ggplot2 Extensions?
 
 There are various ggplot2 extensions that provide more or less easy APIs
 for plotting images. These include but not limited to
