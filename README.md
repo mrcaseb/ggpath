@@ -21,8 +21,8 @@ ggplot.
 
 ## What is the Difference to Other Image Related ggplot2 Extensions?
 
-There are various ggplot2 extensions that provide more or less easy APIs
-for plotting images. These include but not limited to
+There are various ggplot2 extensions that provide similar functionality
+in terms of plotting images. These include but not limited to
 
 -   [ggimage](https://cran.r-project.org/package=ggimage)
 -   [ggpp](https://docs.r4photobiology.info/ggpp/)
