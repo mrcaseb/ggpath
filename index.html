@@ -68,9 +68,9 @@
 <!-- badges: start -->
 <p>ggpath is a ‘ggplot2’ extension that enables robust image grobs in panels and theme elements. This means it helps plotting images (from local paths, from urls or from raw image data) in nearly every part of a ggplot.</p>
 <div class="section level2">
-<h2 id="what-is-the-difference-to-other-image-related-ggplot2-extensions">What is the Difference to Other Image Related ggplot2 Extensions?<a class="anchor" aria-label="anchor" href="#what-is-the-difference-to-other-image-related-ggplot2-extensions"></a>
+<h2 id="comparison-with-similar-image-plotting-packages">Comparison with Similar Image-Plotting Packages<a class="anchor" aria-label="anchor" href="#comparison-with-similar-image-plotting-packages"></a>
 </h2>
-<p>There are various ggplot2 extensions that provide more or less easy APIs for plotting images. These include but not limited to</p>
+<p>There are various ggplot2 extensions that provide similar functionality in terms of plotting images. These include but not limited to</p>
 <ul>
 <li><a href="https://cran.r-project.org/package=ggimage" class="external-link">ggimage</a></li>
 <li><a href="https://docs.r4photobiology.info/ggpp/" class="external-link">ggpp</a></li>
@@ -84,6 +84,11 @@
 <li>options for changing the color of images including a grayscale transformation,</li>
 <li>options for applying transparency, and</li>
 <li>improved performance through image caching.</li>
+</ul>
+<p>There are some downsides compared to the above mentioned packages, e.g.</p>
+<ul>
+<li>cannot combine images and text to a grob as ggtext can with <a href="https://wilkelab.org/ggtext/reference/element_markdown.html" class="external-link"><code>element_markdown</code></a>,</li>
+<li>cannot modify css parts of svgs as <a href="https://github.com/coolbutuseless/ggsvg#styling-svg-with-css-aesthetics-example-1" class="external-link">ggsvg can</a>.</li>
 </ul>
 </div>
 <div class="section level2">
