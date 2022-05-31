@@ -13,6 +13,28 @@ test_that("geom from path works", {
     coord_cartesian(xlim = c(-2, 2)) +
     theme_minimal()
 
+  # alpha > 1 error
+  p2 <- ggplot(plot_data, aes(x = x, y = y)) +
+    geom_from_path(aes(path = path), width = 0.2, alpha = 2) +
+    coord_cartesian(xlim = c(-2, 2)) +
+    theme_minimal()
+
+  # alpha < 0 error
+  p3 <- ggplot(plot_data, aes(x = x, y = y)) +
+    geom_from_path(aes(path = path), width = 0.2, alpha = -1) +
+    coord_cartesian(xlim = c(-2, 2)) +
+    theme_minimal()
+
+  # bad path error
+  p4 <- ggplot(plot_data, aes(x = x, y = y)) +
+    geom_from_path(aes(path = paste0(path, "g")), width = 0.2, alpha = -1) +
+    coord_cartesian(xlim = c(-2, 2)) +
+    theme_minimal()
+
+  expect_error(print(p2), regexp = 'all values of `alpha` have to be in range')
+  expect_error(print(p3), regexp = 'all values of `alpha` have to be in range')
+  expect_error(print(p4), regexp = 'Error in magick_image_readpath')
+
   vdiffr::expect_doppelganger("p1", p1)
 })
 
