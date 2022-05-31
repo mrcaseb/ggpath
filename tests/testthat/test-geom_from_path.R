@@ -9,7 +9,7 @@ test_that("geom from path works", {
 
   # plot images directly from local path and apply transparency
   p1 <- ggplot(plot_data, aes(x = x, y = y)) +
-    geom_from_path(aes(path = path), width = 0.2, alpha = 0.5) +
+    geom_from_path(aes(path = as.factor(path)), width = 0.2, alpha = 0.5) +
     coord_cartesian(xlim = c(-2, 2)) +
     theme_minimal()
 
