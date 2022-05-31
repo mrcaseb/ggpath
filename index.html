@@ -68,6 +68,25 @@
 <!-- badges: start -->
 <p>ggpath is a ‘ggplot2’ extension that enables robust image grobs in panels and theme elements. This means it helps plotting images (from local paths, from urls or from raw image data) in nearly every part of a ggplot.</p>
 <div class="section level2">
+<h2 id="what-is-the-difference-to-other-image-related-ggplot2-extensions">What is the Difference to Other Image Related ggplot2 Extensions<a class="anchor" aria-label="anchor" href="#what-is-the-difference-to-other-image-related-ggplot2-extensions"></a>
+</h2>
+<p>There are various ggplot2 extensions that provide more or less easy APIs for plotting images. These include but not limited to</p>
+<ul>
+<li><a href="https://cran.r-project.org/package=ggimage" class="external-link">ggimage</a></li>
+<li><a href="https://docs.r4photobiology.info/ggpp/" class="external-link">ggpp</a></li>
+<li><a href="https://coolbutuseless.github.io/package/ggsvg/" class="external-link">ggsvg</a></li>
+<li><a href="https://wilkelab.org/ggtext/" class="external-link">ggtext</a></li>
+</ul>
+<p>ggpath combines the strengths of all of the above by providing</p>
+<ul>
+<li>functions to plot images in both the panel (with <a href="https://mrcaseb.github.io/ggpath/reference/geom_from_path.html"><code>geom_from_path</code></a>) and all other plot areas (with <a href="https://mrcaseb.github.io/ggpath/reference/element_path.html"><code>element_path</code></a>),</li>
+<li>robust image aspect ratio,</li>
+<li>options for changing the color of images including a grayscale transformation,</li>
+<li>options for applying transparency, and</li>
+<li>improved performance through image caching.</li>
+</ul>
+</div>
+<div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Until ggpath is available on CRAN, the only way to install it is from <a href="https://github.com/mrcaseb/ggpath" class="external-link">GitHub</a>, for example with:</p>
@@ -76,7 +95,7 @@
 <span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"mrcaseb/ggpath"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <p>The two main features to provide images in a ggplot are a geom (geom_from_path) and a theme element (element_path). Both replace image urls, local image paths, or raw image data with the actual image. And to improve performance, the images are cached locally.</p>
 <p>The below examples use local image files that are shipped with the package. Let’s locate the images first.</p>
@@ -114,6 +133,18 @@
     plot.subtitle <span class="op">=</span> <span class="fu"><a href="reference/element_path.html">element_path</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.9</span>, angle <span class="op">=</span> <span class="fl">45</span><span class="op">)</span>,
   <span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="ggpath-options">ggpath Options<a class="anchor" aria-label="anchor" href="#ggpath-options"></a>
+</h2>
+<p>The option <code>"ggpath.cache"</code> can be used to configure the package cache. It can be set with</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>ggpath.cache <span class="op">=</span> <span class="st">"memory"</span><span class="op">)</span>
+<span class="co"># or</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>ggpath.cache <span class="op">=</span> <span class="st">"filesystem"</span><span class="op">)</span>
+<span class="co"># or</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>ggpath.cache <span class="op">=</span> <span class="st">"off"</span><span class="op">)</span></code></pre></div>
+<p>The default - <code>"memory"</code> - caches in the current session, while <code>"filesystem"</code> caches on disk which means that the cache is available after starting a fresh session. All cache options time out after 24 hours.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -158,10 +189,10 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://CRAN.R-project.org/package=ggpath" class="external-link"><img src="https://www.r-pkg.org/badges/version/ggpath" alt="CRAN status"></a></li>
-<li><a href="https://app.codecov.io/gh/mrcaseb/ggpath?branch=main" class="external-link"><img src="https://codecov.io/gh/mrcaseb/ggpath/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/mrcaseb/ggpath?branch=main" class="external-link"><img src="https://codecov.io/gh/mrcaseb/ggpath/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 </ul>
 </div>
 
