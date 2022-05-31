@@ -1,16 +1,20 @@
 # INTERNAL HELPER THAT BUILDS THE GROBS FOR GeomFromPath and element_path
 build_grobs <- function(i, alpha, colour, path, data,
-                        is_theme_element = FALSE) {
+                        is_theme_element = FALSE,
+                        call = rlang::caller_env()) {
   img <- try(reader_function(path[i]), silent = TRUE)
 
-  if (inherits(img, "try-error")) cli::cli_abort(img)
+  if (inherits(img, "try-error")) cli::cli_abort(img, call = call)
 
   if (is.null(alpha)) { # no alpha requested
     modified_img <- resolve_img_color(img = img, col = colour[i])
   }
   else { # alpha is requested
     if (any(as.numeric(alpha) < 0) || any(as.numeric(alpha) > 1)) {
-      cli::cli_abort("aesthetics {.var alpha} require values between {.val 0} and {.val 1}")
+      cli::cli_abort(c(
+        "all values of {.arg alpha} have to be in range {.val {0}}:{.val {1}}",
+        "x" = "You've supplied {.val {unique(alpha)}}"
+      ), call = call)
     }
     modified_img <- magick::image_fx(img, expression = paste0(alpha[i], "*a"), channel = "alpha")
     modified_img <- resolve_img_color(img = modified_img, col = colour[i])
