@@ -19,7 +19,7 @@ panels and theme elements. This means it helps plotting images (from
 local paths, from urls or from raw image data) in nearly every part of a
 ggplot.
 
-## What is the Difference to Other Image Related ggplot2 Extensions?
+## Comparison with Similar Image-Plotting Packages
 
 There are various ggplot2 extensions that provide similar functionality
 in terms of plotting images. These include but not limited to
@@ -40,6 +40,13 @@ ggpath combines the strengths of all of the above by providing
     transformation,
 -   options for applying transparency, and
 -   improved performance through image caching.
+
+There are some downsides compared to the above mentioned packages, e.g.
+
+-   cannot combine images and text to a grob as ggtext can with
+    [`element_markdown`](https://wilkelab.org/ggtext/reference/element_markdown.html),
+-   cannot modify css parts of svgs as [ggsvg
+    can](https://github.com/coolbutuseless/ggsvg#styling-svg-with-css-aesthetics-example-1).
 
 ## Installation
 
