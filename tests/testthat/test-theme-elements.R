@@ -16,11 +16,11 @@ test_that("logo element works", {
       subtitle = local_image_path,
       x = local_image_path,
       y = local_image_path,
-      caption = local_image_path
+      caption = NULL
     ) +
     theme(
       plot.caption = element_path(hjust = 1, size = 0.6),
-      axis.text.y = element_path(size = 1),
+      axis.text.y = element_path(size = 1, color = "b/w"),
       axis.title.x = element_path(),
       axis.title.y = element_path(vjust = 0.9),
       plot.title = element_path(hjust = 0, size = 2, alpha = 0.5),
