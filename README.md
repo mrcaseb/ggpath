@@ -5,19 +5,41 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggpath)](https://CRAN.R-project.org/package=ggpath)
+[![R-CMD-check](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/mrcaseb/ggpath/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mrcaseb/ggpath?branch=main)
-[![R-CMD-check](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 ggpath is a ‘ggplot2’ extension that enables robust image grobs in
 panels and theme elements. This means it helps plotting images (from
 local paths, from urls or from raw image data) in nearly every part of a
 ggplot.
+
+## What is the Difference to Other Image Related ggplot2 Extensions
+
+There are various ggplot2 extensions that provide more or less easy APIs
+for plotting images. These include but not limited to
+
+-   [ggimage](https://cran.r-project.org/package=ggimage)
+-   [ggpp](https://docs.r4photobiology.info/ggpp/)
+-   [ggsvg](https://coolbutuseless.github.io/package/ggsvg/)
+-   [ggtext](https://wilkelab.org/ggtext/)
+
+ggpath combines the strengths of all of the above by providing
+
+-   functions to plot images in both the panel (with
+    [`geom_from_path`](https://mrcaseb.github.io/ggpath/reference/geom_from_path.html))
+    and all other plot areas (with
+    [`element_path`](https://mrcaseb.github.io/ggpath/reference/element_path.html)),
+-   robust image aspect ratio,
+-   options for changing the color of images including a grayscale
+    transformation,
+-   options for applying transparency, and
+-   improved performance through image caching.
 
 ## Installation
 
@@ -29,7 +51,7 @@ if (!require("pak")) install.packages("pak")
 pak::pak("mrcaseb/ggpath")
 ```
 
-## Example
+## Examples
 
 The two main features to provide images in a ggplot are a geom
 (geom_from_path) and a theme element (element_path). Both replace image
@@ -87,3 +109,21 @@ ggplot(plot_data, aes(x = x, y = local_image_path)) +
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+## ggpath Options
+
+The option `"ggpath.cache"` can be used to configure the package cache.
+It can be set with
+
+``` r
+options(ggpath.cache = "memory")
+# or
+options(ggpath.cache = "filesystem")
+# or
+options(ggpath.cache = "off")
+```
+
+The default - `"memory"` - caches in the current session, while
+`"filesystem"` caches on disk which means that the cache is available
+after starting a fresh session. All cache options time out after 24
+hours.
