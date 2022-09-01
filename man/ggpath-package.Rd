@@ -19,6 +19,8 @@ GeomFromPath
 GeomRefLines
 }
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 A 'ggplot2' extension that enables robust image grobs in panels and theme elements.
 }
 \seealso{
