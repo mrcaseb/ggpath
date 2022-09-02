@@ -2,13 +2,13 @@ test_that("logo element works", {
   library(ggplot2)
 
   # compute path of an R logo file shipped with ggpath
-  local_image_path <- system.file("r_logo.svg", package = "ggpath")
+  local_image_path <- system.file("r_logo.png", package = "ggpath")
 
   # create dataframe with x-y-coordinates and the above local path
   plot_data <- data.frame(x = c(-1, 1), y = 1, path = local_image_path)
 
   # Replace title, subtitle, the caption, axis labels as well as y-axis text
-  # the the local image
+  # with the local image
   p1 <- ggplot(plot_data, aes(x = x, y = local_image_path)) +
     theme_minimal() +
     labs(
