@@ -4,9 +4,8 @@
 # ggpath
 
 <!-- badges: start -->
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/ggpath)](https://CRAN.R-project.org/package=ggpath) -->
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/ggpath)](https://CRAN.R-project.org/package=ggpath)
 [![R-CMD-check](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/mrcaseb/ggpath/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mrcaseb/ggpath?branch=main)
@@ -50,7 +49,15 @@ There are some downsides compared to the above mentioned packages, e.g.
 
 ## Installation
 
-Until ggpath is available on CRAN, the only way to install it is from
+The easiest way to get ggpath is to install it from
+[CRAN](https://cran.r-project.org/) with:
+
+``` r
+install.packages("ggpath")
+```
+
+To get a bug fix or to use a feature from the development version, you
+can install the development version of ggpath from
 [GitHub](https://github.com/mrcaseb/ggpath), for example with:
 
 ``` r

@@ -33,7 +33,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Sebastian Carl \email{mrcaseb@gmail.com}
+\strong{Maintainer}: Sebastian Carl \email{mrcaseb@gmail.com} [copyright holder]
 
 }
 \keyword{datasets}
