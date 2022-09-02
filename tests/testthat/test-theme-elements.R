@@ -2,7 +2,7 @@ test_that("logo element works", {
   library(ggplot2)
 
   # compute path of an R logo file shipped with ggpath
-  local_image_path <- system.file("r_logo.png", package = "ggpath")
+  local_image_path <- system.file("r_logo.svg", package = "ggpath")
 
   # create dataframe with x-y-coordinates and the above local path
   plot_data <- data.frame(x = c(-1, 1), y = 1, path = local_image_path)
