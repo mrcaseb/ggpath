@@ -1,4 +1,7 @@
 test_that("geom from path works", {
+  # prevents ggplot from creating a Rplots.pdf file in test directory
+  if(!interactive()) pdf(NULL)
+
   library(ggplot2)
 
   # compute path of an R logo file shipped with ggpath
