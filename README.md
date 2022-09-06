@@ -4,8 +4,9 @@
 # ggpath
 
 <!-- badges: start -->
-<!-- [![CRAN status](https://www.r-pkg.org/badges/version/ggpath)](https://CRAN.R-project.org/package=ggpath) -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ggpath)](https://CRAN.R-project.org/package=ggpath)
 [![R-CMD-check](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/mrcaseb/ggpath/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mrcaseb/ggpath?branch=main)
@@ -21,7 +22,7 @@ ggplot.
 ## Installation
 
 The easiest way to get ggpath is to install it from
-[CRAN](https://cran.r-project.org/) with:
+[CRAN](https://cran.r-project.org/package=ggpath) with:
 
 ``` r
 install.packages("ggpath")
