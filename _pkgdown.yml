@@ -11,6 +11,14 @@ template:
     heading_font: {google: "Kanit"}
     code_font: {google: "Fira Code"}
     pkgdown-nav-height: 100px
+  opengraph:
+    image:
+      src: man/figures/social_card.png
+      alt: "ggpath social preview card"
+    twitter:
+      creator: "@mrcaseb"
+      site: "@nflfastR"
+      card: summary_large_image
 navbar:
   bg: dark
   structure:
