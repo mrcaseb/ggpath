@@ -11,6 +11,9 @@ template:
     heading_font: {google: "Kanit"}
     code_font: {google: "Fira Code"}
     pkgdown-nav-height: 100px
+  includes:
+    in_header: |
+      <a rel="me" href="https://fosstodon.org/@mrcaseb"> </a>
   opengraph:
     image:
       src: man/figures/social_card.png
