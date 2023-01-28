@@ -36,7 +36,7 @@ test_that("geom from path works", {
 
   expect_error(print(p2), regexp = 'all values of `alpha` have to be in range')
   expect_error(print(p3), regexp = 'all values of `alpha` have to be in range')
-  expect_error(print(p4), regexp = 'Error in magick_image_readpath')
+  expect_error(print(p4), regexp = 'No such file or directory')
 
   vdiffr::expect_doppelganger("p1", p1)
 })
