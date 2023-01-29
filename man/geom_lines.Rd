@@ -24,7 +24,7 @@ geom_mean_lines(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or \code{\link[ggplot2:aes_]{aes_()}}.}
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}}.}
 
 \item{data}{The data to be displayed in this layer. There are three
 options:
@@ -79,7 +79,8 @@ aesthetics (at least one of the bold aesthetics is required):
 \item{\code{alpha = NA}}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 \item{\code{color = "red"}}{ - The color of the drawn lines.}
 \item{\code{linetype = 2}}{ - The linetype of the drawn lines.}
-\item{\code{size = 0.5}}{ - The size of the drawn lines.}
+\item{\code{size = 0.5}}{ - The size of the drawn lines. Deprecated as of ggplot2 3.4.0, use \code{linewidth} instead.}
+\item{\code{linewidth = 0.5}}{ - The width of the drawn lines.}
 }
 }
 
