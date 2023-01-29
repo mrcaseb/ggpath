@@ -18,8 +18,8 @@
 #'   \item{`alpha = NA`}{ - The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 #'   \item{`color = "red"`}{ - The color of the drawn lines.}
 #'   \item{`linetype = 2`}{ - The linetype of the drawn lines.}
-#'   \item{`size = 0.5`}{ - The size of the drawn lines. Deprecated as of ggplot2 3.4.0, use `linewidth` instead.}
-#'   \item{`linewidth = 0.5`}{ - The width of the drawn lines.}
+#'   \item{`size = 0.5`}{ - The size of the drawn lines. Deprecated as of ggplot2 v3.4.0, use `linewidth` instead.}
+#'   \item{`linewidth = 0.5`}{ - The width of the drawn lines. Starting at ggplot2 v3.4.0.}
 #' }
 #' @seealso The underlying ggplot2 geoms [`geom_hline()`] and [`geom_vline()`]
 #' @name geom_lines
@@ -110,19 +110,21 @@ geom_mean_lines <- function(mapping = NULL, data = NULL,
 #' @export
 GeomRefLines <- ggplot2::ggproto("GeomRefLines", ggplot2::Geom,
 
-  optional_aes = c("x0", "y0", "size"),
+  optional_aes = c("x0", "y0", "size", "linewidth"),
 
-  default_aes = ggplot2::aes(colour = "red", linewidth = 0.5, linetype = 2, alpha = NA),
+  default_aes = ggplot2::aes(colour = "red", linewidth = 0.5, size = 0.5, linetype = 2, alpha = NA),
 
   draw_panel = function(data, panel_params, coord, ref_function, na.rm = FALSE) {
     args <- names(data)
 
     # Can't do anything if either of y0 and x0 are aesthetics
     if (all(!c("x0", "y0") %in% args)) {
-      cli::cli_abort("{.var geom_median_lines()} and {.var geom_mean_lines()} require at least one of the following aesthetics: {.var x0}, {.var y0}")
+      cli::cli_abort("{.var geom_median_lines()} and {.var geom_mean_lines()} \\
+                     require at least one of the following aesthetics: \\
+                     {.var x0}, {.var y0}")
     }
 
-    if (any(args == "size")){
+    if (any(args == "size") && is_ggplot_340()){
       cli::cli_warn(
         "The {.arg size} aesthetic has been deprecated as of ggplot2 v3.4.0! \\
         Please use {.arg linewidth} in the future. \\
@@ -135,7 +137,13 @@ GeomRefLines <- ggplot2::ggproto("GeomRefLines", ggplot2::Geom,
     # those variables that are required for the underlying Geoms to work.
     # This could also be achieved by setting inherit.aes to FALSE explicitly but
     # I want to be able to inherit aesthetics so I had to do this differently.
-    relevant_columns <- c("PANEL", "group", "colour", "linewidth", "linetype", "alpha")
+    # We also need to distinguish in the ggplot2 version because the "size"
+    # argument has been replaced by "linewidth" in v3.4.0.
+    relevant_columns <- if(is_ggplot_340()){
+      c("PANEL", "group", "colour", "linewidth", "linetype", "alpha")
+    } else{
+      c("PANEL", "group", "colour", "size", "linetype", "alpha")
+    }
 
     # if x0 and/or y0 are present in data we have to compute the relevant
     # xintercept and yintercept variables and drop anything irrelevant from data
@@ -168,3 +176,5 @@ GeomRefLines <- ggplot2::ggproto("GeomRefLines", ggplot2::Geom,
 
   draw_key = ggplot2::draw_key_path
 )
+
+is_ggplot_340 <- function() utils::packageVersion("ggplot2") >= "3.4.0"
