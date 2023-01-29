@@ -27,6 +27,9 @@ test_that("logo element works", {
       plot.subtitle = element_path(hjust = 0.9, angle = 45),
     )
 
+  # It seems like vdiffr isn't handling cran = FALSE properly so I call
+  # skip_on_cran() explicitly
+  skip_on_cran()
   vdiffr::expect_doppelganger("p1", p1)
 })
 
@@ -65,5 +68,8 @@ test_that("logo element works with 'b/w'", {
       plot.subtitle = element_path(hjust = 0.9, angle = 45),
     )
 
+  # It seems like vdiffr isn't handling cran = FALSE properly so I call
+  # skip_on_cran() explicitly
+  skip_on_cran()
   vdiffr::expect_doppelganger("p2", p2)
 })
