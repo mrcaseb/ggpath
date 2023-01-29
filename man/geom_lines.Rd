@@ -80,7 +80,7 @@ aesthetics (at least one of the bold aesthetics is required):
 \item{\code{color = "red"}}{ - The color of the drawn lines.}
 \item{\code{linetype = 2}}{ - The linetype of the drawn lines.}
 \item{\code{size = 0.5}}{ - The size of the drawn lines. Deprecated as of ggplot2 3.4.0, use \code{linewidth} instead.}
-\item{\code{linewidth = 0.5}}{ - The size of the drawn lines.}
+\item{\code{linewidth = 0.5}}{ - The width of the drawn lines.}
 }
 }
 

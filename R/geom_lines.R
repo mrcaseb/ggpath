@@ -19,7 +19,7 @@
 #'   \item{`color = "red"`}{ - The color of the drawn lines.}
 #'   \item{`linetype = 2`}{ - The linetype of the drawn lines.}
 #'   \item{`size = 0.5`}{ - The size of the drawn lines. Deprecated as of ggplot2 3.4.0, use `linewidth` instead.}
-#'   \item{`linewidth = 0.5`}{ - The size of the drawn lines.}
+#'   \item{`linewidth = 0.5`}{ - The width of the drawn lines.}
 #' }
 #' @seealso The underlying ggplot2 geoms [`geom_hline()`] and [`geom_vline()`]
 #' @name geom_lines
