@@ -38,6 +38,9 @@ test_that("geom lines work", {
     scale_x_reverse() +
     theme_minimal()
 
+  # It seems like vdiffr isn't handling cran = FALSE properly so I call
+  # skip_on_cran() explicitly
+  skip_on_cran()
   vdiffr::expect_doppelganger("p1", p1)
   vdiffr::expect_doppelganger("p2", p2)
   vdiffr::expect_doppelganger("p3", p3)
