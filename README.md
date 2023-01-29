@@ -119,26 +119,26 @@ hours.
 There are various ggplot2 extensions that provide similar functionality
 in terms of plotting images. These include but not limited to
 
--   [ggimage](https://cran.r-project.org/package=ggimage)
--   [ggpp](https://docs.r4photobiology.info/ggpp/)
--   [ggsvg](https://coolbutuseless.github.io/package/ggsvg/)
--   [ggtext](https://wilkelab.org/ggtext/)
+- [ggimage](https://cran.r-project.org/package=ggimage)
+- [ggpp](https://docs.r4photobiology.info/ggpp/)
+- [ggsvg](https://coolbutuseless.github.io/package/ggsvg/)
+- [ggtext](https://wilkelab.org/ggtext/)
 
 ggpath combines the strengths of all of the above by providing
 
--   functions to plot images in both the panel (with
-    [`geom_from_path`](https://mrcaseb.github.io/ggpath/reference/geom_from_path.html))
-    and all other plot areas (with
-    [`element_path`](https://mrcaseb.github.io/ggpath/reference/element_path.html)),
--   robust image aspect ratio,
--   options for changing the color of images including a grayscale
-    transformation,
--   options for applying transparency, and
--   improved performance through image caching.
+- functions to plot images in both the panel (with
+  [`geom_from_path`](https://mrcaseb.github.io/ggpath/reference/geom_from_path.html))
+  and all other plot areas (with
+  [`element_path`](https://mrcaseb.github.io/ggpath/reference/element_path.html)),
+- robust image aspect ratio,
+- options for changing the color of images including a grayscale
+  transformation,
+- options for applying transparency, and
+- improved performance through image caching.
 
 There are some downsides compared to the above mentioned packages, e.g.
 
--   cannot combine images and text to a grob as ggtext can with
-    [`element_markdown`](https://wilkelab.org/ggtext/reference/element_markdown.html),
--   cannot modify css parts of svgs as [ggsvg
-    can](https://github.com/coolbutuseless/ggsvg#styling-svg-with-css-aesthetics-example-1).
+- cannot combine images and text to a grob as ggtext can with
+  [`element_markdown`](https://wilkelab.org/ggtext/reference/element_markdown.html),
+- cannot modify css parts of svgs as [ggsvg
+  can](https://github.com/coolbutuseless/ggsvg#styling-svg-with-css-aesthetics-example-1).
