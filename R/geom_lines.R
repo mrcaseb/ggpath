@@ -110,9 +110,9 @@ geom_mean_lines <- function(mapping = NULL, data = NULL,
 #' @export
 GeomRefLines <- ggplot2::ggproto("GeomRefLines", ggplot2::Geom,
 
-  optional_aes = c("x0", "y0", "size", "linewidth"),
+  optional_aes = c("x0", "y0", "size"),
 
-  default_aes = ggplot2::aes(colour = "red", linewidth = 0.5, size = 0.5, linetype = 2, alpha = NA),
+  default_aes = ggplot2::aes(colour = "red", linewidth = 0.5, linetype = 2, alpha = NA),
 
   draw_panel = function(data, panel_params, coord, ref_function, na.rm = FALSE) {
     args <- names(data)
@@ -132,6 +132,8 @@ GeomRefLines <- ggplot2::ggproto("GeomRefLines", ggplot2::Geom,
       )
       data$linewidth <- data$size
     }
+
+    if(!is_ggplot_340()) data$size <- data$linewidth
 
     # Since y0 and x0 can be in data, it is necessary to select only
     # those variables that are required for the underlying Geoms to work.
