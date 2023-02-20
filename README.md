@@ -96,6 +96,37 @@ ggplot(plot_data, aes(x = x, y = local_image_path)) +
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
+A popular way to personalize a plot is to include a logo in the title
+area. As shown above, we can replace the title or subtitle with an image
+but not combine it with text. So if we want a title, a subtitle and
+still a logo in the title area, we can use the ggplot2 tag, which is
+actually used to implement figure numbering.
+
+``` r
+ggplot(plot_data, aes(x = x, y = 1)) +
+  geom_from_path(aes(path = path), width = 0.2, alpha = 0.2) +
+  coord_cartesian(xlim = c(-2, 2)) +
+  theme_minimal() +
+  labs(
+    title = "This is a very catchy title",
+    subtitle = "And an informative subtitle",
+    x = "x axis label",
+    y = "y axis label",
+    caption = "useful caption",
+    tag = local_image_path
+  ) +
+  theme(
+    plot.tag = element_path(size = 2, vjust = 1, alpha = 0.7),
+    plot.tag.position = c(0.3,1),
+  )
+```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+
+Please note how to place the image in the whole plot area via
+`plot.tag.position`. So in combination with alpha you can place a logo
+also behind title and subtitle.
+
 ## ggpath Options
 
 The option `"ggpath.cache"` can be used to configure the package cache.
