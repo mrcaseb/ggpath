@@ -1,3 +1,7 @@
+# ggpath (development version)
+
+* Invalid paths no longer result in an error. Instead, ggpath will warn the user and insert an empty grob.
+
 # ggpath 1.0.1
 
 * Fixed a test that was failing on some operating systems.

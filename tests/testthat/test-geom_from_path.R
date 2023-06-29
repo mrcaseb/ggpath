@@ -28,15 +28,18 @@ test_that("geom from path works", {
     coord_cartesian(xlim = c(-2, 2)) +
     theme_minimal()
 
-  # bad path error
-  p4 <- ggplot(plot_data, aes(x = x, y = y)) +
+  # create data frame with x-y-coordinates and the above local path
+  # to check the warning. Need separate data set because testthat::expect_warning
+  # does not catch multiple warnings
+  plot_data_warning <- data.frame(x = 1, y = 1, path = local_image_path)
+  p4 <- ggplot(plot_data_warning, aes(x = x, y = y)) +
     geom_from_path(aes(path = paste0(path, "g")), width = 0.2, alpha = -1) +
     coord_cartesian(xlim = c(-2, 2)) +
     theme_minimal()
 
   expect_error(print(p2), regexp = 'all values of `alpha` have to be in range')
   expect_error(print(p3), regexp = 'all values of `alpha` have to be in range')
-  expect_error(print(p4))
+  expect_warning(print(p4))
 
   # It seems like vdiffr isn't handling cran = FALSE properly so I call
   # skip_on_cran() explicitly

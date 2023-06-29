@@ -4,7 +4,24 @@ build_grobs <- function(i, alpha, colour, path, data,
                         call = rlang::caller_env()) {
   img <- try(reader_function(path[i]), silent = TRUE)
 
-  if (inherits(img, "try-error")) cli::cli_abort(img, call = call)
+  # if the path is invalid we warn the user and insert a NULL grob
+  if (inherits(img, "try-error")) {
+    cli::cli_warn(
+      "{.pkg ggpath} failed to read an image from {.path {path[i]}}. \\
+      It will insert an empty grob instead. Here is the \\
+      error message: {img}"
+    )
+
+    return({
+      grid::nullGrob(
+        name = paste0("ggpath.grob.", i),
+        vp = grid::viewport(
+          x = grid::unit(data$x[i], "native"),
+          y = grid::unit(data$y[i], "native")
+        )
+      )
+    })
+  }
 
   if (is.null(alpha)) { # no alpha requested
     modified_img <- resolve_img_color(img = img, col = colour[i])
