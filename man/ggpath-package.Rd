@@ -5,7 +5,6 @@
 \name{GeomFromPath}
 \alias{GeomFromPath}
 \alias{GeomRefLines}
-\alias{ggpath}
 \alias{ggpath-package}
 \title{ggpath: Robust Image Rendering Support for 'ggplot2'}
 \format{

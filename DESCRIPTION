@@ -1,6 +1,6 @@
 Package: ggpath
 Title: Robust Image Rendering Support for 'ggplot2'
-Version: 1.0.1.9000
+Version: 1.0.1.9001
 Authors@R: 
     person("Sebastian", "Carl", , "mrcaseb@gmail.com", role = c("aut", "cre", "cph"))
 Description: A 'ggplot2' extension that enables robust image grobs in
@@ -28,4 +28,4 @@ Suggests:
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1

@@ -24,7 +24,7 @@ test_that("logo element works", {
       axis.title.x = element_path(),
       axis.title.y = element_path(vjust = 0.9),
       plot.title = element_path(hjust = 0, size = 2, alpha = 0.5),
-      plot.subtitle = element_path(hjust = 0.9, angle = 45),
+      plot.subtitle = element_path(hjust = 0.9, angle = 45)
     )
 
   # It seems like vdiffr isn't handling cran = FALSE properly so I call
@@ -65,7 +65,7 @@ test_that("logo element works with 'b/w'", {
       # apply color again but now with colour for 100% test coverage
       axis.title.y = element_path(vjust = 0.9, colour = "b/w"),
       plot.title = element_path(hjust = 0, size = 2, alpha = 0.5),
-      plot.subtitle = element_path(hjust = 0.9, angle = 45),
+      plot.subtitle = element_path(hjust = 0.9, angle = 45)
     )
 
   # It seems like vdiffr isn't handling cran = FALSE properly so I call
