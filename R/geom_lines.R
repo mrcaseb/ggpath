@@ -11,10 +11,10 @@
 #'   the default plot specification.
 #' @section Aesthetics:
 #' `geom_median_lines()` and `geom_mean_lines()` understand the following
-#' aesthetics (at least one of the bold aesthetics is required):
+#' aesthetics (at least one of the `x0` or `y0` aesthetics is required):
 #' \describe{
-#'   \item{**`x0`**}{The variable for which to compute the median/mean that is drawn as vertical line.}
-#'   \item{**`y0`**}{The variable for which to compute the median/mean that is drawn as horizontal line.}
+#'   \item{`x0`}{The variable for which to compute the median/mean that is drawn as vertical line.}
+#'   \item{`y0`}{The variable for which to compute the median/mean that is drawn as horizontal line.}
 #'   \item{`alpha = NA`}{The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 #'   \item{`color = "red"`}{The color of the drawn lines.}
 #'   \item{`linetype = 2`}{The linetype of the drawn lines.}
