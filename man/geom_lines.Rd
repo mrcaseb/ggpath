@@ -74,8 +74,8 @@ to compute their \code{median} or \code{mean} and draw them as a line.
 \code{geom_median_lines()} and \code{geom_mean_lines()} understand the following
 aesthetics (at least one of the bold aesthetics is required):
 \describe{
-\item{\strong{x0}}{The variable for which to compute the median/mean that is drawn as vertical line.}
-\item{\strong{y0}}{The variable for which to compute the median/mean that is drawn as horizontal line.}
+\item{\strong{\code{x0}}}{The variable for which to compute the median/mean that is drawn as vertical line.}
+\item{\strong{\code{y0}}}{The variable for which to compute the median/mean that is drawn as horizontal line.}
 \item{\code{alpha = NA}}{The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 \item{\code{color = "red"}}{The color of the drawn lines.}
 \item{\code{linetype = 2}}{The linetype of the drawn lines.}

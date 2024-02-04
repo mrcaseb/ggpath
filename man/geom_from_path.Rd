@@ -76,9 +76,9 @@ of points in a ggplot. It requires x, y aesthetics as well as a path.
 
 \code{geom_from_path()} understands the following aesthetics (required aesthetics are in bold):
 \describe{
-\item{\strong{x}}{The x-coordinate.}
-\item{\strong{y}}{The y-coordinate.}
-\item{\strong{path}}{a file path, url, raster object or bitmap array. See \code{\link[magick:editing]{magick::image_read()}} for further information.}
+\item{\strong{\code{x}}}{The x-coordinate.}
+\item{\strong{\code{y}}}{The y-coordinate.}
+\item{\strong{\code{path}}}{a file path, url, raster object or bitmap array. See \code{\link[magick:editing]{magick::image_read()}} for further information.}
 \item{\code{alpha = NULL}}{The alpha channel, i.e. transparency level, as a numerical value between 0 and 1.}
 \item{\code{colour = NULL}}{The image will be colorized with this colour. Use the special character \code{"b/w"} to set it to black and white. For more information on valid colour names in ggplot2 see \url{https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill}}
 \item{\code{angle = 0}}{The angle of the image as a numerical value between 0° and 360°.}
