@@ -75,6 +75,11 @@ test_that("logo element works with 'b/w'", {
 })
 
 test_that("background element works", {
+  # we skip mac here because the reference file is created on windows and
+  # comparison breaks on Mac.
+  # Please don't ask me why I create this reference file on windows compared
+  # to the mac reference above lol
+  skip_on_os("mac")
   library(ggplot2)
 
   # compute path of a background image file shipped with ggpath
