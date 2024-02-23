@@ -1,21 +1,31 @@
-#' Theme Element for Image Grobs
+#' Theme Elements for Image Grobs
 #'
 #' @description
-#' In conjunction with the [ggplot2::theme] system, the function `element_path()`
-#' enables images in non-data components of the plot, e.g. axis text. It draws
-#' images from valid image URLs, raster objects, or bitmap arrays.
+#' In conjunction with the [ggplot2::theme] system, the `element_` functions
+#' specify the display of how non-data components of a ggplot are drawn. Both
+#' functions call [magick::image_read] to process image files from valid image
+#' URLs, local paths, raster objects, or bitmap arrays.
 #'
+#'   - `element_path()`: draws images as replacement for [ggplot2::element_text].
+#'   Use this to replace text with images.
+#'   - `element_raster()`: draws images as replacement for [ggplot2::element_rect].
+#'   Use this to put images in plot background.
+#'
+#' @inheritParams grid::rasterGrob
 #' @param alpha The alpha channel, i.e. transparency level, as a numerical value
 #'   between 0 and 1.
 #' @param colour,color The image will be colorized with this color. Use the
 #'   special character `"b/w"` to set it to black and white. For more information
 #'   on valid color names in ggplot2 see
 #'   <https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill>.
-#' @param hjust,vjust The horizontal and vertical adjustment respectively.
+# @param hjust,vjust The horizontal and vertical adjustment respectively.
 #'   Must be a numerical value between 0 and 1.
 #' @param angle The angle of the element as a numerical value between 0° and 360°.
 #' @param size The output grob size in `cm` (!).
-#' @seealso [geom_from_path()] for more information.
+#' @param image_path bla
+#'
+#' @seealso [geom_from_path()], [grid::rasterGrob()], [grid::unit()]
+#' @name theme_elements
 #' @return An S3 object of class `element`.
 #' @examples
 #' library(ggplot2)
@@ -46,13 +56,75 @@
 #'     plot.title = element_path(hjust = 0, size = 2, alpha = 0.5),
 #'     plot.subtitle = element_path(hjust = 0.9, angle = 45),
 #'   )
+#' @details
+#' To be able to use the functions correctly, a basic understanding of how they
+#' work is required.
+#'
+#' **`element_path()`** can be applied wherever [ggplot2::element_text] is
+#' usually used. It replaces text with an image if the text is a valid image
+#' file location or data.
+#'
+#' **`element_raster()`** can be applied wherever [ggplot2::element_rect] is
+#' usually used. A path in the sense of [magick::image_read] must be explicitly
+#' specified here because it cannot read plot data. It is designed exclusively
+#' for inserting an image into the background of a plot and calls
+#' [grid::rasterGrob] internally.
+#' Neither `width` nor `height` need to be specified, in which case, the aspect
+#' ratio of the image is preserved. If both `width` and `height` are specified,
+#' it is likely that the image will be distorted.
+#'
+NULL
+
 #' @export
+#' @rdname theme_elements
 element_path <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NULL,
                          color = NULL, angle = NULL, size = 0.5) {
   if (!is.null(color))  colour <- color
   structure(
-    list(alpha = alpha, colour = colour, hjust = hjust, vjust = vjust, angle = angle, size = size),
+    list(
+      alpha = alpha,
+      colour = colour,
+      hjust = hjust,
+      vjust = vjust,
+      angle = angle,
+      size = size
+    ),
     class = c("element_path", "element_text", "element")
+  )
+}
+
+#' @export
+#' @rdname theme_elements
+element_raster <- function(image_path,
+                           x = grid::unit(0.5, "npc"),
+                           y = grid::unit(0.5, "npc"),
+                           width = grid::unit(1, "npc"),
+                           height = grid::unit(1, "npc"),
+                           just = "centre",
+                           hjust = NULL,
+                           vjust = NULL,
+                           interpolate = TRUE,
+                           default.units = "npc",
+                           name = NULL,
+                           gp = NULL,
+                           vp = NULL) {
+  structure(
+    list(
+      image_path = image_path,
+      x = x,
+      y = y,
+      width = width,
+      height = height,
+      just = just,
+      hjust = hjust,
+      vjust = vjust,
+      interpolate = interpolate,
+      default.units = default.units,
+      name = name,
+      gp = gp,
+      vp = vp
+    ),
+    class = c("element_raster", "element_rect", "element")
   )
 }
 
@@ -107,3 +179,32 @@ grobHeight.ggpath_element <- function(x, ...) grid::unit(x$size, "cm")
 
 #' @export
 grobWidth.ggpath_element <- function(x, ...) grid::unit(x$size, "cm")
+
+#' @export
+element_grob.element_raster <- function(element, ...) {
+  img <- try(reader_function(element$image_path), silent = TRUE)
+  # if the path is invalid we warn the user and insert a NULL grob
+  if (inherits(img, "try-error")) {
+    cli::cli_warn(
+      "{.pkg ggpath} failed to read an image from {.path {element$image_path}}. \\
+      It will insert an empty grob instead. Here is the \\
+      error message: {img}"
+    )
+    return(grid::nullGrob())
+  }
+  grid::rasterGrob(
+    image = img,
+    x = element$x,
+    y = element$y,
+    width = element$width,
+    height = element$height,
+    just = element$just,
+    hjust = element$hjust,
+    vjust = element$vjust,
+    interpolate = element$interpolate,
+    default.units = element$default.units,
+    name = element$name,
+    gp = element$gp,
+    vp = element$vp
+  )
+}
