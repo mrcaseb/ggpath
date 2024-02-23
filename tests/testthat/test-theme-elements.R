@@ -73,3 +73,34 @@ test_that("logo element works with 'b/w'", {
   skip_on_cran()
   vdiffr::expect_doppelganger("p2", p2)
 })
+
+test_that("background element works", {
+  # we skip mac here because the reference file is created on windows and
+  # comparison breaks on Mac.
+  # Please don't ask me why I create this reference file on windows compared
+  # to the mac reference above lol
+  skip_on_os("mac")
+  library(ggplot2)
+
+  # compute path of a background image file shipped with ggpath
+  local_background_image <- system.file("example_bg.jpg", package = "ggpath")
+
+  # create dataframe with x-y-coordinates and the above local path
+  plot_data <- data.frame(x = c(-1, 1), y = 1)
+
+  # Replace title, subtitle, the caption, axis labels as well as y-axis text
+  # with the local image
+  p3 <- ggplot(plot_data, aes(x = x, y = y)) +
+    geom_point() +
+    coord_cartesian(xlim = c(-2, 2)) +
+    theme_dark() +
+    theme(
+      plot.background = element_raster(local_background_image),
+      panel.background = element_rect(fill = "transparent")
+    )
+
+  # It seems like vdiffr isn't handling cran = FALSE properly so I call
+  # skip_on_cran() explicitly
+  skip_on_cran()
+  vdiffr::expect_doppelganger("p3", p3)
+})
