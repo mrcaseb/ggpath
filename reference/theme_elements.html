@@ -212,8 +212,9 @@ file location or data.</p>
 <p><strong><code>element_raster()</code></strong> can be applied wherever ggplot2::element_rect is
 usually used. A path in the sense of <a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">magick::image_read</a> must be explicitly
 specified here because it cannot read plot data. It is designed exclusively
-for inserting an image into the background of a plot.
-Neither <code>width</code> nor <code>height</code> needs to be specified, in which case, the aspect
+for inserting an image into the background of a plot and calls
+<a href="https://rdrr.io/r/grid/grid.raster.html" class="external-link">grid::rasterGrob</a> internally.
+Neither <code>width</code> nor <code>height</code> need to be specified, in which case, the aspect
 ratio of the image is preserved. If both <code>width</code> and <code>height</code> are specified,
 it is likely that the image will be distorted.</p>
     </div>
