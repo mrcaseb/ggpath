@@ -34,30 +34,34 @@ can install the development version of ggpath from
 
 ``` r
 if (!require("pak")) install.packages("pak")
-pak::pak("mrcaseb/ggpath")
+pak::pkg_install("mrcaseb/ggpath")
 ```
 
 ## Examples
 
 The two main features to provide images in a ggplot are a geom
-(geom_from_path) and a theme element (element_path). Both replace image
-urls, local image paths, or raw image data with the actual image. And to
-improve performance, the images are cached locally.
+(`geom_from_path()`) and theme elements (`element_path()` &
+`element_raster()`). All of them replace image urls, local image paths,
+or raw image data with the actual image. And to improve performance, the
+images are cached locally.
 
 The below examples use local image files that are shipped with the
 package. Let’s locate the images first.
 
 ``` r
-local_image_path <- system.file("r_logo.png", package = "ggpath")
+local_r_logo <- system.file("r_logo.png", package = "ggpath")
+local_background_image <- system.file("example_bg.jpg", package = "ggpath")
 ```
 
-Now, we can make a simple plot, where we use the image like a point by
-replacing the local path with the actual image.
+### Image Geom
+
+Now, we can make a simple plot, where we use the logo image like a point
+by replacing the local path with the actual image.
 
 ``` r
 library(ggplot2)
 library(ggpath)
-plot_data <- data.frame(x = c(-1, 1), y = 1, path = local_image_path)
+plot_data <- data.frame(x = c(-1, 1), y = 1, path = local_r_logo)
 ggplot(plot_data, aes(x = x, y = y)) +
   geom_from_path(aes(path = path), width = 0.2) +
   coord_cartesian(xlim = c(-2, 2)) +
@@ -66,23 +70,25 @@ ggplot(plot_data, aes(x = x, y = y)) +
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
+### Images in Theme Elements (element_path)
+
 We can build on top of that by adding new axis labels, axis titles, plot
-title and subtitle, or a caption and using the ggpath theme element.
-Note the usage of transparency with the `alpha` argument, the
-justification with the `hjust`/`vjust` arguments, or the rotation with
-the `angle` argument.
+title and subtitle, or a caption and using a ggpath theme element. Note
+the usage of transparency with the `alpha` argument, the justification
+with the `hjust`/`vjust` arguments, or the rotation with the `angle`
+argument.
 
 ``` r
-ggplot(plot_data, aes(x = x, y = local_image_path)) +
+ggplot(plot_data, aes(x = x, y = local_r_logo)) +
   geom_from_path(aes(path = path), width = 0.2, alpha = 0.2) +
   coord_cartesian(xlim = c(-2, 2)) +
   theme_minimal() +
   labs(
-    title = local_image_path,
-    subtitle = local_image_path,
-    x = local_image_path,
-    y = local_image_path,
-    caption = local_image_path
+    title = local_r_logo,
+    subtitle = local_r_logo,
+    x = local_r_logo,
+    y = local_r_logo,
+    caption = local_r_logo
   ) +
   theme(
     plot.caption = element_path(hjust = 1, size = 0.6),
@@ -113,7 +119,7 @@ ggplot(plot_data, aes(x = x, y = 1)) +
     x = "x axis label",
     y = "y axis label",
     caption = "useful caption",
-    tag = local_image_path
+    tag = local_r_logo
   ) +
   theme(
     plot.tag = element_path(size = 2, vjust = 1, alpha = 0.7),
@@ -126,6 +132,44 @@ ggplot(plot_data, aes(x = x, y = 1)) +
 Please note how to place the image in the whole plot area via
 `plot.tag.position`. So in combination with alpha you can place a logo
 also behind title and subtitle.
+
+### Images in Theme Elements (element_raster)
+
+The second theme element, `element_raster()`, allows rendering of images
+in the plot background. It is a replacement for
+`ggplot2::element_rect()`. In the following example, we plot the two
+logos again and now set a sample background. The sample background is a
+photo by [Dan Cristian
+Pădureț](https://unsplash.com/@dancristianpaduret?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
+on
+[Unsplash](https://unsplash.com/photos/white-printer-paper-on-brown-textile-izq7BRX6xfw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
+
+``` r
+ggplot(plot_data, aes(x = x, y = y)) +
+  geom_from_path(aes(path = path), width = 0.2) +
+  coord_cartesian(xlim = c(-2, 2)) +
+  theme_dark() +
+  theme(
+    plot.background = element_raster(local_background_image),
+    panel.background = element_rect(fill = "transparent")
+  )
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+
+Some notes on the plot and the general behaviour
+
+- We remove the panel background to be able to see the plot background
+  by setting it’s `fill` parameter to “transparent”.
+- `element_raster()` defaults to plot the image to 100% of the plot
+  width and height (`grid::unit(1, "npc")`). This means that it might
+  change the aspect ratio of the image if it doesn’t equal the aspect
+  ratio of the actual plot.
+- `element_raster()` defaults to plot the image exactly in the middle of
+  the plot (`grid::unit(0.5, "npc")` combined with `just = "centre"`).
+  This means you can move around the image if you set it’s size bigger
+  than the plot, e.g. with `height = grid::unit(2, "npc")`. See
+  `help("unit", "grid")` for further information.
 
 ## ggpath Options
 
