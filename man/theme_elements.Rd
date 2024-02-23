@@ -115,8 +115,9 @@ file location or data.
 \strong{\code{element_raster()}} can be applied wherever \link[ggplot2:element]{ggplot2::element_rect} is
 usually used. A path in the sense of \link[magick:editing]{magick::image_read} must be explicitly
 specified here because it cannot read plot data. It is designed exclusively
-for inserting an image into the background of a plot.
-Neither \code{width} nor \code{height} needs to be specified, in which case, the aspect
+for inserting an image into the background of a plot and calls
+\link[grid:grid.raster]{grid::rasterGrob} internally.
+Neither \code{width} nor \code{height} need to be specified, in which case, the aspect
 ratio of the image is preserved. If both \code{width} and \code{height} are specified,
 it is likely that the image will be distorted.
 }
