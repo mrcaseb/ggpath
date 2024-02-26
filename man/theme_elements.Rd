@@ -125,22 +125,23 @@ it is likely that the image will be distorted.
 library(ggplot2)
 library(ggpath)
 
-# compute path of an R logo file shipped with ggpath
-local_image_path <- system.file("r_logo.svg", package = "ggpath")
+# compute paths of R logo file and background image file shipped with ggpath
+local_r_logo <- system.file("r_logo.png", package = "ggpath")
+local_background_image <- system.file("example_bg.jpg", package = "ggpath")
 
 # create dataframe with x-y-coordinates and the above local path
-plot_data <- data.frame(x = c(-1, 1), y = 1, path = local_image_path)
+plot_data <- data.frame(x = c(-1, 1), y = 1, path = local_r_logo)
 
 # Replace title, subtitle, the caption, axis labels as well as y-axis text
 # the the local image
-ggplot(plot_data, aes(x = x, y = local_image_path)) +
+ggplot(plot_data, aes(x = x, y = local_r_logo)) +
   theme_minimal() +
   labs(
-    title = local_image_path,
-    subtitle = local_image_path,
-    x = local_image_path,
-    y = local_image_path,
-    caption = local_image_path
+    title = local_r_logo,
+    subtitle = local_r_logo,
+    x = local_r_logo,
+    y = local_r_logo,
+    caption = local_r_logo
   ) +
   theme(
     plot.caption = element_path(hjust = 1, size = 0.6),
@@ -149,6 +150,16 @@ ggplot(plot_data, aes(x = x, y = local_image_path)) +
     axis.title.y = element_path(vjust = 0.9),
     plot.title = element_path(hjust = 0, size = 2, alpha = 0.5),
     plot.subtitle = element_path(hjust = 0.9, angle = 45),
+  )
+
+# Use local image as plot background
+ggplot(plot_data, aes(x = x, y = y)) +
+  geom_from_path(aes(path = path), width = 0.2) +
+  coord_cartesian(xlim = c(-2, 2)) +
+  theme_dark() +
+  theme(
+    plot.background = element_raster(local_background_image),
+    panel.background = element_rect(fill = "transparent")
   )
 }
 \seealso{
