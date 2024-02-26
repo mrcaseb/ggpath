@@ -99,6 +99,18 @@ test_that("background element works", {
       panel.background = element_rect(fill = "transparent")
     )
 
+  # Do above but intentionally break the path
+  p4 <- ggplot(plot_data, aes(x = x, y = y)) +
+    geom_point() +
+    coord_cartesian(xlim = c(-2, 2)) +
+    theme_dark() +
+    theme(
+      plot.background = element_raster(paste0(local_background_image, "_broken_path")),
+      panel.background = element_rect(fill = "transparent")
+    )
+
+  expect_warning(print(p4), "ggpath failed to read an image from")
+
   # It seems like vdiffr isn't handling cran = FALSE properly so I call
   # skip_on_cran() explicitly
   skip_on_cran()
