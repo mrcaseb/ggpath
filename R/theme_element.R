@@ -18,13 +18,12 @@
 #'   special character `"b/w"` to set it to black and white. For more information
 #'   on valid color names in ggplot2 see
 #'   <https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill>.
-# @param hjust,vjust The horizontal and vertical adjustment respectively.
-#'   Must be a numerical value between 0 and 1.
 #' @param angle The angle of the element as a numerical value between 0° and 360°.
 #' @param size The output grob size in `cm` (!).
-#' @param image_path bla
+#' @param image_path A file path, url, raster object or bitmap array.
+#' See [magick::image_read] for further information.
 #'
-#' @seealso [geom_from_path()], [grid::rasterGrob()], [grid::unit()]
+#' @seealso [geom_from_path()], [grid::rasterGrob()], [grid::unit()], [magick::image_read]
 #' @name theme_elements
 #' @return An S3 object of class `element`.
 #' @examples
