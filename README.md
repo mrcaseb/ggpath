@@ -203,8 +203,8 @@ ggpath combines the strengths of all of the above by providing
 
 - functions to plot images in both the panel (with
   [`geom_from_path`](https://mrcaseb.github.io/ggpath/reference/geom_from_path.html))
-  and all other plot areas (with
-  [`element_path`](https://mrcaseb.github.io/ggpath/reference/element_path.html)),
+  and all other plot areas (with [`element_path` &
+  `element_raster`](https://mrcaseb.github.io/ggpath/reference/theme_elements.html)),
 - robust image aspect ratio,
 - options for changing the color of images including a grayscale
   transformation,
