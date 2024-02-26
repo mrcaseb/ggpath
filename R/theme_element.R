@@ -1,14 +1,14 @@
 #' Theme Elements for Image Grobs
 #'
 #' @description
-#' In conjunction with the [ggplot2::theme] system, the `element_` functions
+#' In conjunction with the [ggplot2::theme()] system, the `element_` functions
 #' specify the display of how non-data components of a ggplot are drawn. Both
-#' functions call [magick::image_read] to process image files from valid image
+#' functions call [magick::image_read()] to process image files from valid image
 #' URLs, local paths, raster objects, or bitmap arrays.
 #'
-#'   - `element_path()`: draws images as replacement for [ggplot2::element_text].
+#'   - `element_path()`: draws images as replacement for [ggplot2::element_text()].
 #'   Use this to replace text with images.
-#'   - `element_raster()`: draws images as replacement for [ggplot2::element_rect].
+#'   - `element_raster()`: draws images as replacement for [ggplot2::element_rect()].
 #'   Use this to put images in plot background.
 #'
 #' @inheritParams grid::rasterGrob
@@ -21,9 +21,9 @@
 #' @param angle The angle of the element as a numerical value between 0° and 360°.
 #' @param size The output grob size in `cm` (!).
 #' @param image_path A file path, url, raster object or bitmap array.
-#' See [magick::image_read] for further information.
+#' See [magick::image_read()] for further information.
 #'
-#' @seealso [geom_from_path()], [grid::rasterGrob()], [grid::unit()], [magick::image_read]
+#' @seealso [geom_from_path()], [grid::rasterGrob()], [grid::unit()], [magick::image_read()]
 #' @name theme_elements
 #' @return An S3 object of class `element`.
 #' @examples
@@ -59,15 +59,15 @@
 #' To be able to use the functions correctly, a basic understanding of how they
 #' work is required.
 #'
-#' **`element_path()`** can be applied wherever [ggplot2::element_text] is
+#' **`element_path()`** can be applied wherever [ggplot2::element_text()] is
 #' usually used. It replaces text with an image if the text is a valid image
 #' file location or data.
 #'
-#' **`element_raster()`** can be applied wherever [ggplot2::element_rect] is
-#' usually used. A path in the sense of [magick::image_read] must be explicitly
+#' **`element_raster()`** can be applied wherever [ggplot2::element_rect()] is
+#' usually used. A path in the sense of [magick::image_read()] must be explicitly
 #' specified here because it cannot read plot data. It is designed exclusively
 #' for inserting an image into the background of a plot and calls
-#' [grid::rasterGrob] internally.
+#' [grid::rasterGrob()] internally.
 #' Neither `width` nor `height` need to be specified, in which case, the aspect
 #' ratio of the image is preserved. If both `width` and `height` are specified,
 #' it is likely that the image will be distorted.
