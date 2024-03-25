@@ -28,6 +28,9 @@
     <loc>https://mrcaseb.github.io/ggpath/news/index.html</loc>
   </url>
   <url>
+    <loc>https://mrcaseb.github.io/ggpath/reference/element_path.html</loc>
+  </url>
+  <url>
     <loc>https://mrcaseb.github.io/ggpath/reference/geom_from_path.html</loc>
   </url>
   <url>
@@ -38,8 +41,5 @@
   </url>
   <url>
     <loc>https://mrcaseb.github.io/ggpath/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcaseb.github.io/ggpath/reference/theme_elements.html</loc>
   </url>
 </urlset>
