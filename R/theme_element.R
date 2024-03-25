@@ -24,7 +24,8 @@
 #' See [magick::image_read()] for further information.
 #'
 #' @seealso [geom_from_path()], [grid::rasterGrob()], [grid::unit()], [magick::image_read()]
-#' @name theme_elements
+#' @name element_path
+#' @aliases element_raster
 #' @return An S3 object of class `element`.
 #' @examples
 #' library(ggplot2)
@@ -86,7 +87,7 @@
 NULL
 
 #' @export
-#' @rdname theme_elements
+#' @rdname element_path
 element_path <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NULL,
                          color = NULL, angle = NULL, size = 0.5) {
   if (!is.null(color))  colour <- color
@@ -104,7 +105,7 @@ element_path <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NULL,
 }
 
 #' @export
-#' @rdname theme_elements
+#' @rdname element_path
 element_raster <- function(image_path,
                            x = grid::unit(0.5, "npc"),
                            y = grid::unit(0.5, "npc"),
