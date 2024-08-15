@@ -21,7 +21,7 @@
 #'   \item{`size = 0.5`}{The size of the drawn lines. Deprecated as of ggplot2 v3.4.0, use `linewidth` instead.}
 #'   \item{`linewidth = 0.5`}{The width of the drawn lines. Starting at ggplot2 v3.4.0.}
 #' }
-#' @seealso The underlying ggplot2 geoms [`geom_hline()`] and [`geom_vline()`]
+#' @seealso The underlying ggplot2 geoms [ggplot2::geom_hline()] and [ggplot2::geom_vline()]
 #' @name geom_lines
 #' @return A ggplot2 layer ([ggplot2::layer()]) that can be added to a plot
 #'   created with [ggplot2::ggplot()].
