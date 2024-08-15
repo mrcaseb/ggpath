@@ -17,9 +17,11 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/ggpath)](https://CRAN.R-project.org/package=ggpath)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/ggpath)](https://CRAN.R-project.org/package=ggpath)
+[![Dev status](https://img.shields.io/github/r-package/v/mrcaseb/ggpath/main?label=dev%20version&style=flat-square&logo=github)](https://mrcaseb.github.io/ggpath/)
 [![R-CMD-check](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/mrcaseb/ggpath/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mrcaseb/ggpath?branch=main)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Codecov test coverage](https://codecov.io/gh/mrcaseb/ggpath/graph/badge.svg)](https://app.codecov.io/gh/mrcaseb/ggpath)
 <!-- badges: end -->
 
 ggpath is a 'ggplot2' extension that enables robust image grobs in panels and theme elements. This means it helps plotting images (from local paths, from urls or from raw image data) in nearly every part of a ggplot. 
