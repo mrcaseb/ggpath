@@ -1,4 +1,4 @@
-# ggpath (development version)
+# ggpath 1.0.2
 
 * Invalid paths no longer result in an error. Instead, ggpath will warn the user and insert an empty grob.
 * Minor adjustment to the format of lists in the documentation to avoid check problems in an upcoming R release.

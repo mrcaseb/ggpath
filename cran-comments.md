@@ -1,6 +1,6 @@
 ## Submission
 
-This is a patch release that fixes a test and catches warnings in ggplot2 >= v3.4.0
+This is a patch release that fixes check NOTEs
 
 ## R CMD check results
 
