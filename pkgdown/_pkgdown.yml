@@ -4,13 +4,12 @@ authors:
     href: https://twitter.com/mrcaseb
 template:
   bootstrap: 5
-  bootswatch: materia
+  light-switch: true
   bslib:
     font_scale: 1.1
     base_font: {google: "IBM Plex Sans"}
     heading_font: {google: "Kanit"}
     code_font: {google: "Fira Code"}
-    pkgdown-nav-height: 100px
   includes:
     in_header: |
       <a rel="me" href="https://fosstodon.org/@mrcaseb"> </a>
@@ -26,7 +25,7 @@ navbar:
   bg: dark
   structure:
     left:  [home, intro, reference, news, articles]
-    right: [github]
+    right: [lightswitch, github]
   components:
     reference:
       text: "Functions"
