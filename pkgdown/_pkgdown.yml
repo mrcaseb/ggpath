@@ -1,7 +1,7 @@
 url: https://mrcaseb.github.io/ggpath/
 authors:
   Sebastian Carl:
-    href: https://twitter.com/mrcaseb
+    href: https://bsky.app/profile/mrcaseb.nflverse.com
 template:
   bootstrap: 5
   light-switch: true
@@ -22,10 +22,9 @@ template:
       site: "@nflfastR"
       card: summary_large_image
 navbar:
-  bg: dark
   structure:
     left:  [home, intro, reference, news, articles]
-    right: [lightswitch, github]
+    right: [search, lightswitch, github]
   components:
     reference:
       text: "Functions"
