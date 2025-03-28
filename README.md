@@ -11,7 +11,7 @@ status](https://www.r-pkg.org/badges/version/ggpath)](https://CRAN.R-project.org
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/ggpath)](https://CRAN.R-project.org/package=ggpath)
 [![Dev
 status](https://img.shields.io/github/r-package/v/mrcaseb/ggpath/main?label=dev%20version&style=flat-square&logo=github)](https://mrcaseb.github.io/ggpath/)
-[![R-CMD-check](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://img.shields.io/github/actions/workflow/status/mrcaseb/ggpath/R-CMD-check.yaml?label=R%20check&style=flat-square&logo=github)](https://github.com/mrcaseb/ggpath/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![Codecov test
