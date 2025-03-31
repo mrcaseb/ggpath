@@ -1,3 +1,7 @@
+# ggpath (development version)
+
+* ggpath now requires R 4.1 because magick needs this R version. This also follows the [Tidyverse R version support rules](https://www.tidyverse.org/blog/2019/04/r-version-support/). (#14)
+
 # ggpath 1.0.2
 
 * Invalid paths no longer result in an error. Instead, ggpath will warn the user and insert an empty grob.
