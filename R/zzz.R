@@ -6,7 +6,6 @@
   if(!memoise_option %in% c("memory", "filesystem", "off")) memoise_option <- "memory"
 
   if(memoise_option == "filesystem"){
-    backports::import(pkgname, "R_user_dir")
     cache_dir <- R_user_dir("ggpath", "cache")
     if (!dir.exists(cache_dir)) dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
     cache <- cachem::cache_disk(dir = cache_dir)

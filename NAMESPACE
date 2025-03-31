@@ -11,11 +11,7 @@ export(element_raster)
 export(geom_from_path)
 export(geom_mean_lines)
 export(geom_median_lines)
-if (getRversion() >= "4.0.0") {
-  importFrom(tools, R_user_dir)
-} else {
-  importFrom(backports, R_user_dir)
-}
 import(grid)
 importFrom(ggplot2,element_grob)
 importFrom(rlang,"%||%")
+importFrom(tools,R_user_dir)
