@@ -1,6 +1,7 @@
 # ggpath (development version)
 
 * ggpath now requires R 4.1 because magick needs this R version. This also follows the [Tidyverse R version support rules](https://www.tidyverse.org/blog/2019/04/r-version-support/). (#14)
+* rewrite theme elements in S7 to fully work with ggplot2 v4.0. (#16)
 
 # ggpath 1.0.2
 
