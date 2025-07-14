@@ -264,8 +264,5 @@ S7::method(draw_element, element_raster) <- function(element, ...) {
     vjust = element@vjust,
     interpolate = element@interpolate,
     default.units = element@default.units
-    # name = element@name
-    # gp = element@gp,
-    # vp = element@vp
   )
 }

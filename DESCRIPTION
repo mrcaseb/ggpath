@@ -14,7 +14,7 @@ Depends:
 Imports: 
     cachem (>= 1.0.0),
     cli (>= 3.0.0),
-    ggplot2 (>= 3.3.0),
+    ggplot2 (>= 3.5.2),
     grid,
     magick (>= 2.7.3),
     memoise (>= 2.0.0),
