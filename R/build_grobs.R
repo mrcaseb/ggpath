@@ -23,7 +23,7 @@ build_grobs <- function(i, alpha, colour, path, data,
     })
   }
 
-  if (is.null(alpha)) { # no alpha requested
+  if (is.null(alpha) | all(alpha == 1L)) { # no alpha requested
     modified_img <- resolve_img_color(img = img, col = colour[i])
   }
   else { # alpha is requested
@@ -58,8 +58,8 @@ build_grobs <- function(i, alpha, colour, path, data,
       vp = grid::viewport(
         x = grid::unit(data$x[i], "npc"),
         y = grid::unit(data$y[i], "npc"),
-        width = grid::unit(data$width[i], "npc"),
-        height = grid::unit(data$height[i], "npc"),
+        width = data$width[i],
+        height = data$height[i],
         angle = data$angle[i]
       ),
       just = c(data$hjust[i], data$vjust[i]),

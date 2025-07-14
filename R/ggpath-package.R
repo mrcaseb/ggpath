@@ -2,9 +2,11 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom ggplot2 element_grob
+#' @importFrom ggplot2 element_text draw_element element
 #' @import grid
 #' @importFrom rlang %||%
 #' @importFrom tools R_user_dir
+# enable usage of <S7_object>@name in package code
+#' @rawNamespace if (getRversion() < "4.3.0") importFrom("S7", "@")
 ## usethis namespace: end
 NULL

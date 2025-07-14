@@ -6,13 +6,13 @@
 \title{Theme Elements for Image Grobs}
 \usage{
 element_path(
-  alpha = NULL,
-  colour = NA,
-  hjust = NULL,
-  vjust = NULL,
+  alpha = 1L,
+  colour = NA_character_,
+  hjust = 0.5,
+  vjust = 0.5,
   color = NULL,
-  angle = NULL,
-  size = 0.5
+  angle = 0,
+  size = grid::unit(0.5, "cm")
 )
 
 element_raster(
@@ -22,20 +22,17 @@ element_raster(
   width = grid::unit(1, "npc"),
   height = grid::unit(1, "npc"),
   just = "centre",
-  hjust = NULL,
-  vjust = NULL,
-  interpolate = TRUE,
-  default.units = "npc",
-  name = NULL,
-  gp = NULL,
-  vp = NULL
+  hjust = 0.5,
+  vjust = 0.5,
+  interpolate = TRUE
 )
 }
 \arguments{
 \item{alpha}{The alpha channel, i.e. transparency level, as a numerical value
-between 0 and 1.}
+between 0 and 1. \code{1L} skips alpha channel modification for more speed.}
 
-\item{colour, color}{The image will be colorized with this color. Use the
+\item{colour, color}{The image will be colorized with this color. Defaults to
+\code{NA_character_} which means no change of color at all. Use the
 special character \code{"b/w"} to set it to black and white. For more information
 on valid color names in ggplot2 see
 \url{https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill}.}
@@ -48,7 +45,8 @@ on valid color names in ggplot2 see
 
 \item{angle}{The angle of the element as a numerical value between 0° and 360°.}
 
-\item{size}{The output grob size in \code{cm} (!).}
+\item{size}{The output grob size as a \link[grid:unit]{grid::unit}. If given a numeric,
+\code{cm} will be applied as unit.}
 
 \item{image_path}{A file path, url, raster object or bitmap array.
 See \code{\link[magick:editing]{magick::image_read()}} for further information.}
@@ -75,21 +73,9 @@ See \code{\link[magick:editing]{magick::image_read()}} for further information.}
     image (the alternative is to use nearest-neighbour interpolation,
     which gives a more blocky result).
   }
-
-\item{default.units}{A string indicating the default units to use
-    if \code{x}, \code{y}, \code{width}, or \code{height}
-    are only given as numeric vectors.}
-
-\item{name}{ A character identifier. }
-
-\item{gp}{An object of class \code{"gpar"}, typically the output
-    from a call to the function \code{\link[grid]{gpar}}.  This is basically
-    a list of graphical parameter settings.}
-
-\item{vp}{A Grid viewport object (or NULL).}
 }
 \value{
-An S3 object of class \code{element}.
+An S7 object of class \code{element}.
 }
 \description{
 In conjunction with the \code{\link[ggplot2:theme]{ggplot2::theme()}} system, the \code{element_} functions
@@ -144,7 +130,7 @@ ggplot(plot_data, aes(x = x, y = local_r_logo)) +
   ) +
   theme(
     plot.caption = element_path(hjust = 1, size = 0.6),
-    axis.text.y = element_path(size = 1),
+    axis.text.y.left = element_path(size = 1),
     axis.title.x = element_path(),
     axis.title.y = element_path(vjust = 0.9),
     plot.title = element_path(hjust = 0, size = 2, alpha = 0.5),
