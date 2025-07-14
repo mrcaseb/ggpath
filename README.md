@@ -95,12 +95,12 @@ ggplot(plot_data, aes(x = x, y = local_r_logo)) +
     caption = local_r_logo
   ) +
   theme(
-    plot.caption = element_path(hjust = 1, size = 0.6),
-    axis.text.y = element_path(size = 1),
+    plot.caption = element_path(hjust = 1, size = grid::unit(4, "lines")),
+    axis.text.y.left = element_path(size = 1, alpha = 0.4),
     axis.title.x = element_path(),
     axis.title.y = element_path(vjust = 0.9),
     plot.title = element_path(hjust = 0, size = 2, alpha = 0.5),
-    plot.subtitle = element_path(hjust = 0.9, angle = 45),
+    plot.subtitle = element_path(hjust = 0.9, angle = 45)
   )
 ```
 
@@ -154,7 +154,7 @@ ggplot(plot_data, aes(x = x, y = y)) +
   coord_cartesian(xlim = c(-2, 2)) +
   theme_dark() +
   theme(
-    plot.background = element_raster(local_background_image),
+    plot.background = element_raster(image_path = local_background_image),
     panel.background = element_rect(fill = "transparent")
   )
 ```

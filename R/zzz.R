@@ -1,6 +1,8 @@
 # nocov start
 .onLoad <- function(libname, pkgname){
 
+  S7::methods_register()
+
   memoise_option <- getOption("ggpath.cache", default = "memory")
 
   if(!memoise_option %in% c("memory", "filesystem", "off")) memoise_option <- "memory"

@@ -13,20 +13,22 @@
 #'
 #' @inheritParams grid::rasterGrob
 #' @param alpha The alpha channel, i.e. transparency level, as a numerical value
-#'   between 0 and 1.
-#' @param colour,color The image will be colorized with this color. Use the
+#'   between 0 and 1. `1L` skips alpha channel modification for more speed.
+#' @param colour,color The image will be colorized with this color. Defaults to
+#' `NA_character_` which means no change of color at all. Use the
 #'   special character `"b/w"` to set it to black and white. For more information
 #'   on valid color names in ggplot2 see
 #'   <https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill>.
 #' @param angle The angle of the element as a numerical value between 0° and 360°.
-#' @param size The output grob size in `cm` (!).
+#' @param size The output grob size as a [grid::unit]. If given a numeric,
+#'  `cm` will be applied as unit.
 #' @param image_path A file path, url, raster object or bitmap array.
 #' See [magick::image_read()] for further information.
 #'
 #' @seealso [geom_from_path()], [grid::rasterGrob()], [grid::unit()], [magick::image_read()]
 #' @name element_path
 #' @aliases element_raster
-#' @return An S3 object of class `element`.
+#' @return An S7 object of class `element`.
 #' @examples
 #' library(ggplot2)
 #' library(ggpath)
@@ -51,7 +53,7 @@
 #'   ) +
 #'   theme(
 #'     plot.caption = element_path(hjust = 1, size = 0.6),
-#'     axis.text.y = element_path(size = 1),
+#'     axis.text.y.left = element_path(size = 1),
 #'     axis.title.x = element_path(),
 #'     axis.title.y = element_path(vjust = 0.9),
 #'     plot.title = element_path(hjust = 0, size = 2, alpha = 0.5),
@@ -86,76 +88,125 @@
 #'
 NULL
 
-#' @export
-#' @rdname element_path
-element_path <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NULL,
-                         color = NULL, angle = NULL, size = 0.5) {
-  if (!is.null(color))  colour <- color
-  structure(
-    list(
-      alpha = alpha,
-      colour = colour,
-      hjust = hjust,
-      vjust = vjust,
-      angle = angle,
-      size = size
-    ),
-    class = c("element_path", "element_text", "element")
-  )
-}
+s7_unit_class <- S7::new_S3_class(class(grid::unit(1, "npc")))
 
 #' @export
 #' @rdname element_path
-element_raster <- function(image_path,
-                           x = grid::unit(0.5, "npc"),
-                           y = grid::unit(0.5, "npc"),
-                           width = grid::unit(1, "npc"),
-                           height = grid::unit(1, "npc"),
-                           just = "centre",
-                           hjust = NULL,
-                           vjust = NULL,
-                           interpolate = TRUE,
-                           default.units = "npc",
-                           name = NULL,
-                           gp = NULL,
-                           vp = NULL) {
-  structure(
-    list(
-      image_path = image_path,
-      x = x,
-      y = y,
-      width = width,
-      height = height,
-      just = just,
-      hjust = hjust,
-      vjust = vjust,
-      interpolate = interpolate,
-      default.units = default.units,
-      name = name,
-      gp = gp,
-      vp = vp
-    ),
-    class = c("element_raster", "element_rect", "element")
-  )
-}
+element_path <- S7::new_class(
+  "element_path",
+  parent = element_text,
+  properties = list(
+    alpha = S7::new_property(S7::class_numeric),
+    colour = S7::new_property(S7::class_character),
+    hjust = S7::new_property(S7::class_numeric),
+    vjust = S7::new_property(S7::class_numeric),
+    angle = S7::new_property(S7::class_numeric),
+    size = S7::new_property(S7::class_numeric | s7_unit_class)
+  ),
+  constructor = function(
+    alpha = 1L,
+    colour = NA_character_,
+    hjust = 0.5,
+    vjust = 0.5,
+    color = NULL,
+    angle = 0,
+    size = grid::unit(0.5, "cm")
+  ) {
+    obj <-
+      S7::new_object(
+        S7::S7_object(),
+        alpha = alpha,
+        colour = color %||% colour,
+        hjust = hjust,
+        vjust = vjust,
+        angle = angle,
+        size = if (grid::is.unit(size)) size else grid::unit(size, "cm"),
+        inherit.blank = FALSE
+      )
+    class(obj) <- c(
+      "ggpath::element_path",
+      "ggplot2::element_text",
+      "ggplot2::element",
+      "S7_object"
+    )
+    obj
+  }
+)
 
 #' @export
-element_grob.element_path <- function(element, label = "", x = NULL, y = NULL,
-                                      alpha = NULL, colour = NULL,
-                                      hjust = 0.5, vjust = 0.5,
-                                      angle = 0, size = NULL, ...) {
+#' @rdname element_path
+element_raster <- S7::new_class(
+  "element_raster",
+  parent = element,
+  properties = list(
+    image_path = S7::new_property(S7::class_character),
+    x = S7::new_property(S7::class_numeric | s7_unit_class),
+    y = S7::new_property(S7::class_numeric | s7_unit_class),
+    width = S7::new_property(S7::class_numeric | s7_unit_class),
+    height = S7::new_property(S7::class_numeric | s7_unit_class),
+    just = S7::new_property(S7::class_character),
+    hjust = S7::new_property(S7::class_numeric),
+    vjust = S7::new_property(S7::class_numeric),
+    interpolate = S7::new_property(S7::class_logical)
+  ),
+  constructor = function(
+    image_path,
+    x = grid::unit(0.5, "npc"),
+    y = grid::unit(0.5, "npc"),
+    width = grid::unit(1, "npc"),
+    height = grid::unit(1, "npc"),
+    just = "centre",
+    hjust = 0.5,
+    vjust = 0.5,
+    interpolate = TRUE
+  ) {
+    obj <-
+      S7::new_object(
+        S7::S7_object(),
+        image_path = image_path,
+        x = x,
+        y = y,
+        width = width,
+        height = height,
+        just = just,
+        hjust = hjust,
+        vjust = vjust,
+        interpolate = interpolate
+      )
+    class(obj) <- c(
+      "ggpath::element_raster",
+      "ggplot2::element_rect",
+      "ggplot2::element",
+      "S7_object"
+    )
+    obj
+  }
+)
 
+S7::method(draw_element, element_path) <- function(
+  element,
+  label = "",
+  x = NULL,
+  y = NULL,
+  alpha = NULL,
+  colour = NULL,
+  hjust = 0.5,
+  vjust = 0.5,
+  angle = 0,
+  size = grid::unit(0.5, "cm"),
+  ...
+) {
   if (is.null(label)) return(ggplot2::zeroGrob())
 
   n <- max(length(x), length(y), 1)
-  vj <- element$vjust %||% vjust
-  hj <- element$hjust %||% hjust
-  angle <- element$angle %||% angle
+  vj <- element@vjust %||% vjust
+  hj <- element@hjust %||% hjust
+  angle <- element@angle %||% angle
   x <- x %||% rep(hj, n)
   y <- y %||% rep(vj, n)
-  alpha <- alpha %||% rep(element$alpha, n)
-  colour <- colour %||% rep(element$colour, n)
-  size <- size %||% element$size
+  alpha <- alpha %||% rep(element@alpha, n)
+  colour <- colour %||% rep(element@colour, n)
+  size <- element@size %||% size
 
   grobs <- lapply(
     seq_along(label),
@@ -168,8 +219,8 @@ element_grob.element_path <- function(element, label = "", x = NULL, y = NULL,
       y = as.numeric(y),
       hjust = rep(hj, n),
       vjust = rep(vj, n),
-      width = rep(1, n),
-      height = rep(1, n),
+      width = rep(size, n),
+      height = rep(size, n),
       angle = rep(angle, n)
     ),
     is_theme_element = TRUE
@@ -186,18 +237,17 @@ element_grob.element_path <- function(element, label = "", x = NULL, y = NULL,
 }
 
 #' @export
-grobHeight.ggpath_element <- function(x, ...) grid::unit(x$size, "cm")
+grobHeight.ggpath_element <- function(x, ...) x$size
 
 #' @export
-grobWidth.ggpath_element <- function(x, ...) grid::unit(x$size, "cm")
+grobWidth.ggpath_element <- function(x, ...) x$size
 
-#' @export
-element_grob.element_raster <- function(element, ...) {
-  img <- try(reader_function(element$image_path), silent = TRUE)
+S7::method(draw_element, element_raster) <- function(element, ...) {
+  img <- try(reader_function(element@image_path), silent = TRUE)
   # if the path is invalid we warn the user and insert a NULL grob
   if (inherits(img, "try-error")) {
     cli::cli_warn(
-      "{.pkg ggpath} failed to read an image from {.path {element$image_path}}. \\
+      "{.pkg ggpath} failed to read an image from {.path {element@image_path}}. \\
       It will insert an empty grob instead. Here is the \\
       error message: {img}"
     )
@@ -205,17 +255,17 @@ element_grob.element_raster <- function(element, ...) {
   }
   grid::rasterGrob(
     image = img,
-    x = element$x,
-    y = element$y,
-    width = element$width,
-    height = element$height,
-    just = element$just,
-    hjust = element$hjust,
-    vjust = element$vjust,
-    interpolate = element$interpolate,
-    default.units = element$default.units,
-    name = element$name,
-    gp = element$gp,
-    vp = element$vp
+    x = element@x,
+    y = element@y,
+    width = element@width,
+    height = element@height,
+    just = element@just,
+    hjust = element@hjust,
+    vjust = element@vjust,
+    interpolate = element@interpolate,
+    default.units = element@default.units
+    # name = element@name
+    # gp = element@gp,
+    # vp = element@vp
   )
 }
