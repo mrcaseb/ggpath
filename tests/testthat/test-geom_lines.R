@@ -54,5 +54,5 @@ test_that("geom lines work", {
     geom_mean_lines(color = "blue") +
     theme_minimal()
 
-  expect_warning(print(p6), "The `size` aesthetic has been deprecated")
+  expect_warning(print(p6), "The `size` aesthetic for lines has been deprecated")
 })
