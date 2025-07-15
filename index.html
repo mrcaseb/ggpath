@@ -42,7 +42,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ggpath</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,12 +132,12 @@
 <span>    caption <span class="op">=</span> <span class="va">local_r_logo</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span>    plot.caption <span class="op">=</span> <span class="fu"><a href="reference/element_path.html">element_path</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span>,</span>
-<span>    axis.text.y <span class="op">=</span> <span class="fu"><a href="reference/element_path.html">element_path</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    plot.caption <span class="op">=</span> <span class="fu"><a href="reference/element_path.html">element_path</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">4</span>, <span class="st">"lines"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    axis.text.y.left <span class="op">=</span> <span class="fu"><a href="reference/element_path.html">element_path</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span>,</span>
 <span>    axis.title.x <span class="op">=</span> <span class="fu"><a href="reference/element_path.html">element_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    axis.title.y <span class="op">=</span> <span class="fu"><a href="reference/element_path.html">element_path</a></span><span class="op">(</span>vjust <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span>,</span>
 <span>    plot.title <span class="op">=</span> <span class="fu"><a href="reference/element_path.html">element_path</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">2</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
-<span>    plot.subtitle <span class="op">=</span> <span class="fu"><a href="reference/element_path.html">element_path</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.9</span>, angle <span class="op">=</span> <span class="fl">45</span><span class="op">)</span>,</span>
+<span>    plot.subtitle <span class="op">=</span> <span class="fu"><a href="reference/element_path.html">element_path</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.9</span>, angle <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
 <p>A popular way to personalize a plot is to include a logo in the title area. As shown above, we can replace the title or subtitle with an image but not combine it with text. So if we want a title, a subtitle and still a logo in the title area, we can use the ggplot2 tag, which is actually used to implement figure numbering.</p>
@@ -171,7 +171,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_dark</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span>    plot.background <span class="op">=</span> <span class="fu"><a href="reference/element_path.html">element_raster</a></span><span class="op">(</span><span class="va">local_background_image</span><span class="op">)</span>,</span>
+<span>    plot.background <span class="op">=</span> <span class="fu"><a href="reference/element_path.html">element_raster</a></span><span class="op">(</span>image_path <span class="op">=</span> <span class="va">local_background_image</span><span class="op">)</span>,</span>
 <span>    panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"transparent"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>

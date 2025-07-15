@@ -30,7 +30,7 @@ Use this to put images in plot background.
 
     <a class="navbar-brand me-2" href="../index.html">ggpath</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,13 +74,13 @@ Use this to put images in plot background.</p></li>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">element_path</span><span class="op">(</span></span>
-<span>  alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  colour <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  hjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  vjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  colour <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
+<span>  hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  vjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  angle <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  size <span class="op">=</span> <span class="fl">0.5</span></span>
+<span>  angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  size <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="st">"cm"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">element_raster</span><span class="op">(</span></span>
@@ -90,13 +90,9 @@ Use this to put images in plot background.</p></li>
 <span>  width <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"npc"</span><span class="op">)</span>,</span>
 <span>  height <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"npc"</span><span class="op">)</span>,</span>
 <span>  just <span class="op">=</span> <span class="st">"centre"</span>,</span>
-<span>  hjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  vjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  interpolate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  default.units <span class="op">=</span> <span class="st">"npc"</span>,</span>
-<span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  gp <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  vp <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  vjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  interpolate <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -106,11 +102,12 @@ Use this to put images in plot background.</p></li>
 
 <dl><dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>
 <dd><p>The alpha channel, i.e. transparency level, as a numerical value
-between 0 and 1.</p></dd>
+between 0 and 1. <code>1L</code> skips alpha channel modification for more speed.</p></dd>
 
 
 <dt id="arg-colour-color">colour, color<a class="anchor" aria-label="anchor" href="#arg-colour-color"></a></dt>
-<dd><p>The image will be colorized with this color. Use the
+<dd><p>The image will be colorized with this color. Defaults to
+<code>NA_character_</code> which means no change of color at all. Use the
 special character <code>"b/w"</code> to set it to black and white. For more information
 on valid color names in ggplot2 see
 <a href="https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill" class="external-link">https://ggplot2.tidyverse.org/articles/ggplot2-specs.html?q=colour#colour-and-fill</a>.</p></dd>
@@ -131,7 +128,8 @@ on valid color names in ggplot2 see
 
 
 <dt id="arg-size">size<a class="anchor" aria-label="anchor" href="#arg-size"></a></dt>
-<dd><p>The output grob size in <code>cm</code> (!).</p></dd>
+<dd><p>The output grob size as a <a href="https://rdrr.io/r/grid/unit.html" class="external-link">grid::unit</a>. If given a numeric,
+<code>cm</code> will be applied as unit.</p></dd>
 
 
 <dt id="arg-image-path">image_path<a class="anchor" aria-label="anchor" href="#arg-image-path"></a></dt>
@@ -170,30 +168,10 @@ See <code><a href="https://docs.ropensci.org/magick/reference/editing.html" clas
     image (the alternative is to use nearest-neighbour interpolation,
     which gives a more blocky result).</p></dd>
 
-
-<dt id="arg-default-units">default.units<a class="anchor" aria-label="anchor" href="#arg-default-units"></a></dt>
-<dd><p>A string indicating the default units to use
-    if <code>x</code>, <code>y</code>, <code>width</code>, or <code>height</code>
-    are only given as numeric vectors.</p></dd>
-
-
-<dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
-<dd><p>A character identifier.</p></dd>
-
-
-<dt id="arg-gp">gp<a class="anchor" aria-label="anchor" href="#arg-gp"></a></dt>
-<dd><p>An object of class <code>"gpar"</code>, typically the output
-    from a call to the function <code><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></code>.  This is basically
-    a list of graphical parameter settings.</p></dd>
-
-
-<dt id="arg-vp">vp<a class="anchor" aria-label="anchor" href="#arg-vp"></a></dt>
-<dd><p>A Grid viewport object (or NULL).</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An S3 object of class <code>element</code>.</p>
+    <p>An S7 object of class <code>element</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -241,7 +219,7 @@ it is likely that the image will be distorted.</p>
 <span class="r-in"><span>  <span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    plot.caption <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    axis.text.y <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    axis.text.y.left <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    axis.title.x <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    axis.title.y <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span>vjust <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    plot.title <span class="op">=</span> <span class="fu">element_path</span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">2</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span></span>
