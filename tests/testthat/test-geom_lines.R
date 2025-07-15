@@ -47,14 +47,12 @@ test_that("geom lines work", {
   vdiffr::expect_doppelganger("p4", p4)
   vdiffr::expect_doppelganger("p5", p5)
 
-  if(is_ggplot_340()){
-    # deprecated size aesthetic warning
-    p6 <- ggplot(mtcars, aes(x = disp, y = mpg, y0 = mpg, x0 = disp)) +
-      geom_point() +
-      geom_median_lines(size = 2) +
-      geom_mean_lines(color = "blue") +
-      theme_minimal()
+  # deprecated size aesthetic warning
+  p6 <- ggplot(mtcars, aes(x = disp, y = mpg, y0 = mpg, x0 = disp)) +
+    geom_point() +
+    geom_median_lines(size = 2) +
+    geom_mean_lines(color = "blue") +
+    theme_minimal()
 
-    expect_warning(print(p6), "The `size` aesthetic has been deprecated")
-  }
+  expect_warning(print(p6), "The `size` aesthetic for lines has been deprecated")
 })
