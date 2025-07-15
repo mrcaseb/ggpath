@@ -34,11 +34,6 @@ test_that("theme element works", {
 })
 
 test_that("theme element works with 'b/w'", {
-  # we test mac only here and add the color = "b/w" argument
-  # because the reference file is created on a mac and comparison breaks
-  # on other operating systems because of slightly different grey tones.
-  skip_on_os(c("windows", "linux", "solaris"))
-
   library(ggplot2)
 
   # compute path of an R logo file shipped with ggpath
@@ -71,6 +66,15 @@ test_that("theme element works with 'b/w'", {
   # It seems like vdiffr isn't handling cran = FALSE properly so I call
   # skip_on_cran() explicitly
   skip_on_cran()
+
+  # we test mac only here and add the color = "b/w" argument
+  # because the reference file is created on a mac and comparison breaks
+  # on other operating systems because of slightly different grey tones.
+  # for code coverage we build the plot without printing it
+  out <- ggplot2::build_ggplot(p2) |>
+    ggplot2::gtable_ggplot()
+  skip_on_os(c("windows", "linux", "solaris", "mac"))
+
   vdiffr::expect_doppelganger("p2", p2)
 })
 
