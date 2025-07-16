@@ -58,8 +58,8 @@ build_grobs <- function(i, alpha, colour, path, data,
       vp = grid::viewport(
         x = grid::unit(data$x[i], "npc"),
         y = grid::unit(data$y[i], "npc"),
-        width = data$width[i],
-        height = data$height[i],
+        width = grid::unit(data$width[i], "npc"),
+        height = grid::unit(data$height[i], "npc"),
         angle = data$angle[i]
       ),
       just = c(data$hjust[i], data$vjust[i]),
