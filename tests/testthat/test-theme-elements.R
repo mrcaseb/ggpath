@@ -73,7 +73,7 @@ test_that("theme element works with 'b/w'", {
   # for code coverage we build the plot without printing it
   out <- ggplot2::build_ggplot(p2) |>
     ggplot2::gtable_ggplot()
-  skip_on_os(c("windows", "linux", "solaris", "mac"))
+  skip_on_os(c("windows", "linux", "solaris"))
 
   vdiffr::expect_doppelganger("p2", p2)
 })
