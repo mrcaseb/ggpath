@@ -2,25 +2,29 @@
 build_grobs <- function(i, alpha, colour, path, data,
                         is_theme_element = FALSE,
                         call = rlang::caller_env()) {
-  img <- try(reader_function(path[i]), silent = TRUE)
+  to_read <- path[i]
+
+  # to_read might be a list of length 1 if ggpath's S7 method is called
+  # from other packages, e.g. nflplotR
+  # If that is the case, we unlist and check whether the object is NULL.
+  # If it is NULL we can return a NULL grob silently as the calling packages
+  # are supposed to alert the user about non matches.
+  if (is.list(to_read)) {
+    to_read <- unlist(to_read, recursive = FALSE, use.names = FALSE)
+  }
+  if (is.null(to_read)) return(ggpath_null_grob(data = data, i = i))
+
+  img <- try(reader_function(to_read), silent = TRUE)
 
   # if the path is invalid we warn the user and insert a NULL grob
   if (inherits(img, "try-error")) {
     cli::cli_warn(
-      "{.pkg ggpath} failed to read an image from {.path {path[i]}}. \\
-      It will insert an empty grob instead. Here is the \\
+      "{.pkg ggpath} failed to read an image from {.path {to_read}}. \\
+      It will insert an empty graphic object instead. Here is the \\
       error message: {img}"
     )
 
-    return({
-      grid::nullGrob(
-        name = paste0("ggpath.grob.", i),
-        vp = grid::viewport(
-          x = grid::unit(data$x[i], "native"),
-          y = grid::unit(data$y[i], "native")
-        )
-      )
-    })
+    return(ggpath_null_grob(data = data, i = i))
   }
 
   if (is.null(alpha) | all(alpha == 1L)) { # no alpha requested
@@ -88,4 +92,14 @@ resolve_img_color <- function(img, col){
     modified_img <- magick::image_colorize(img, opa, col)
   }
   modified_img
+}
+
+ggpath_null_grob <- function(data, i){
+  grid::nullGrob(
+    name = paste0("ggpath.grob.", i),
+    vp = grid::viewport(
+      x = grid::unit(data$x[i], "native"),
+      y = grid::unit(data$y[i], "native")
+    )
+  )
 }

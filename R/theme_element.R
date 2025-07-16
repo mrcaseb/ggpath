@@ -198,7 +198,7 @@ S7::method(draw_element, element_path) <- function(
 ) {
   if (is.null(label)) return(ggplot2::zeroGrob())
 
-  n <- max(length(x), length(y), 1)
+  n <- max(length(x), length(y), length(label), 1)
   vj <- element@vjust %||% vjust
   hj <- element@hjust %||% hjust
   angle <- element@angle %||% angle
