@@ -183,7 +183,7 @@ element_raster <- S7::new_class(
   }
 )
 
-S7::method(draw_element, element_path) <- function(
+S7::method(element_grob, element_path) <- function(
   element,
   label = "",
   x = NULL,
@@ -242,7 +242,7 @@ grobHeight.ggpath_element <- function(x, ...) x$size
 #' @export
 grobWidth.ggpath_element <- function(x, ...) x$size
 
-S7::method(draw_element, element_raster) <- function(element, ...) {
+S7::method(element_grob, element_raster) <- function(element, ...) {
   img <- try(reader_function(element@image_path), silent = TRUE)
   # if the path is invalid we warn the user and insert a NULL grob
   if (inherits(img, "try-error")) {

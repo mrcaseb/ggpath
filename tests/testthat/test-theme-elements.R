@@ -71,8 +71,8 @@ test_that("theme element works with 'b/w'", {
   # because the reference file is created on a mac and comparison breaks
   # on other operating systems because of slightly different grey tones.
   # for code coverage we build the plot without printing it
-  out <- ggplot2::build_ggplot(p2) |>
-    ggplot2::gtable_ggplot()
+  out <- ggplot2::ggplot_build(p2) |>
+    ggplot2::ggplot_gtable()
   skip_on_os(c("windows", "linux", "solaris"))
 
   vdiffr::expect_doppelganger("p2", p2)

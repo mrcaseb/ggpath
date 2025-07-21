@@ -2,7 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom ggplot2 element_text draw_element element
+#' @importFrom ggplot2 element_text element_grob element
 #' @import grid
 #' @importFrom rlang %||%
 #' @importFrom tools R_user_dir
