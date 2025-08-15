@@ -73,6 +73,9 @@ test_that("theme element works with 'b/w'", {
   # for code coverage we build the plot without printing it
   out <- ggplot2::ggplot_build(p2) |>
     ggplot2::ggplot_gtable()
+  # announcing the snapshot file prevents testthat from deleting the file
+  # if the test is skipped
+  announce_snapshot_file(name = "p2.svg")
   skip_on_os(c("windows", "linux", "solaris"))
 
   vdiffr::expect_doppelganger("p2", p2)
@@ -117,6 +120,9 @@ test_that("background element works", {
   # comparison breaks on Mac.
   # Please don't ask me why I create this reference file on windows compared
   # to the mac reference above lol
+  # announcing the snapshot file prevents testthat from deleting the file
+  # if the test is skipped
+  announce_snapshot_file(name = "p3.svg")
   skip_on_os("mac")
   vdiffr::expect_doppelganger("p3", p3)
 })
