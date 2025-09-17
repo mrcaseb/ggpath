@@ -143,10 +143,7 @@ The second theme element, `element_raster()`, allows rendering of images
 in the plot background. It is a replacement for
 `ggplot2::element_rect()`. In the following example, we plot the two
 logos again and now set a sample background. The sample background is a
-photo by [Dan Cristian
-Pădureț](https://unsplash.com/@dancristianpaduret?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
-on
-[Unsplash](https://unsplash.com/photos/white-printer-paper-on-brown-textile-izq7BRX6xfw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
+photo by Dan Cristian Pădureț on Unsplash.
 
 ``` r
 ggplot(plot_data, aes(x = x, y = y)) +
