@@ -1,6 +1,6 @@
 ## Submission
 
-This is a patch release that fixes check NOTEs
+This is a patch release that fixes failing tests due to ggplot2 v4 release.
 
 ## R CMD check results
 
