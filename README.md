@@ -53,7 +53,7 @@ The below examples use local image files that are shipped with the
 package. Let’s locate the images first.
 
 ``` r
-local_r_logo <- system.file("r_logo.png", package = "ggpath")
+r_logo <- "https://cran.r-project.org/Rlogo.svg"
 local_background_image <- system.file("example_bg.jpg", package = "ggpath")
 ```
 
@@ -65,7 +65,7 @@ by replacing the local path with the actual image.
 ``` r
 library(ggplot2)
 library(ggpath)
-plot_data <- data.frame(x = c(-1, 1), y = 1, path = local_r_logo)
+plot_data <- data.frame(x = c(-1, 1), y = 1, path = r_logo)
 ggplot(plot_data, aes(x = x, y = y)) +
   geom_from_path(aes(path = path), width = 0.2) +
   coord_cartesian(xlim = c(-2, 2)) +
@@ -83,16 +83,16 @@ with the `hjust`/`vjust` arguments, or the rotation with the `angle`
 argument.
 
 ``` r
-ggplot(plot_data, aes(x = x, y = local_r_logo)) +
+ggplot(plot_data, aes(x = x, y = r_logo)) +
   geom_from_path(aes(path = path), width = 0.2, alpha = 0.2) +
   coord_cartesian(xlim = c(-2, 2)) +
   theme_minimal() +
   labs(
-    title = local_r_logo,
-    subtitle = local_r_logo,
-    x = local_r_logo,
-    y = local_r_logo,
-    caption = local_r_logo
+    title = r_logo,
+    subtitle = r_logo,
+    x = r_logo,
+    y = r_logo,
+    caption = r_logo
   ) +
   theme(
     plot.caption = element_path(hjust = 1, size = grid::unit(4, "lines")),
@@ -123,7 +123,7 @@ ggplot(plot_data, aes(x = x, y = 1)) +
     x = "x axis label",
     y = "y axis label",
     caption = "useful caption",
-    tag = local_r_logo
+    tag = r_logo
   ) +
   theme(
     plot.tag = element_path(size = 2, vjust = 1, alpha = 0.7),
