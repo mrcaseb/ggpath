@@ -171,8 +171,3 @@ There are some downsides compared to the above mentioned packages, e.g.
 
 - cannot combine images and text to a grob as ggtext can with [`element_markdown`](https://wilkelab.org/ggtext/reference/element_markdown.html),
 - cannot modify css parts of svgs as [ggsvg can](https://github.com/coolbutuseless/ggsvg#styling-svg-with-css-aesthetics-example-1).
-
-
-
-
-  
