@@ -1,4 +1,4 @@
-# ggpath (development version)
+# ggpath 1.1.0
 
 ggpath now requires ggplot2 v4! This package is intended to be a ggplot2 extension 
 and if ggplot2 version jumps make breaking changes, then it's best for the extension 
