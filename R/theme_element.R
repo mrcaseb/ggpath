@@ -219,8 +219,8 @@ S7::method(element_grob, element_path) <- function(
       y = as.numeric(y),
       hjust = rep(hj, n),
       vjust = rep(vj, n),
-      width = rep(1, n),
-      height = rep(1, n),
+      width = rep(size, n),
+      height = rep(size, n),
       angle = rep(angle, n)
     ),
     is_theme_element = TRUE
