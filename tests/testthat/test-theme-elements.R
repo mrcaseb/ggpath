@@ -126,3 +126,46 @@ test_that("background element works", {
   skip_on_os("mac")
   vdiffr::expect_doppelganger("p3", p3)
 })
+
+test_that("theme element works with plot.tag", {
+  # We skip this on cran as tags are likely to break in the future and
+  # the test downloads an image
+  skip_on_cran()
+  skip_if_offline("github.com")
+
+  library(ggplot2)
+
+  p <- ggplot(data = NULL, aes(x = 1, y = 1)) +
+    geom_point() +
+    theme_minimal() +
+    labs(
+      title = "title",
+      subtitle = "subtitle",
+      tag = "https://github.com/nflverse/nflseedR/raw/master/man/figures/caption.png"
+    )
+
+  p5 <- p +
+    theme(
+      plot.tag = element_path(size = grid::unit(1, "lines"), hjust = 1),
+      plot.tag.location = "margin",
+      plot.tag.position = "top"
+    )
+
+  p6 <- p +
+    theme(
+      plot.tag = element_path(size = grid::unit(10, "lines"), hjust = 1, vjust = 1),
+      plot.tag.location = "plot",
+      plot.tag.position = "top"
+    )
+
+  p7 <- p +
+    theme(
+      plot.tag = element_path(size = grid::unit(10, "lines")),
+      plot.tag.location = "plot",
+      plot.tag.position = c(0.75, 0.75)
+    )
+
+  vdiffr::expect_doppelganger("p5", p5)
+  vdiffr::expect_doppelganger("p6", p6)
+  vdiffr::expect_doppelganger("p7", p7)
+})
