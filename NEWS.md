@@ -1,3 +1,7 @@
+# ggpath (development version)
+
+* adjust how size is applied to theme elements to avoid huge margins around some images. 
+
 # ggpath 1.1.0
 
 ggpath now requires ggplot2 v4! This package is intended to be a ggplot2 extension 

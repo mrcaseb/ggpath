@@ -208,6 +208,34 @@ S7::method(element_grob, element_path) <- function(
   colour <- colour %||% rep(element@colour, n)
   size <- element@size %||% size
 
+  # This next code block is a stupid hack but I currently can't
+  # find a better solution to an issue related to the plot.tag
+  # To preserve aspect ratio of images, I set width and height
+  # in the viewport to 1npc which works fine for all theme elements
+  # except the tag. To make tags work when tag.location is "plot"
+  # or "panel" (that's the usecase I am mostly looking at because
+  # users want to position an image at any spot in the plot) I have
+  # to set width and height in the viewport to "size".
+  # Since ggplot2 doesn't tell me if it's a tag or not, I have to
+  # search the call stack to identify the tag. This is dangerous
+  # as renaming in ggplot2 can break things. That's why I only search
+  # for "tag", hoping it will remain in any sort of function name.
+  # This is not complicated enough, though. When tag location is
+  # "margin" I cannot apply the above. The only way to find out
+  # if location is "margin", is hacking the caller environment and
+  # looking for "location".
+  # All of this is highly dangerous and possibly breaks in the future.
+  # I will try to reach out to ggplot2 devs and discuss how I can solve
+  # this. It's likely an issue on my side, where I just don't apply
+  # widths and heights in grobs and viewports correctly.
+  tag_in_calls <- grepl("tag", x = sys.calls())
+  is_tag <- any(tag_in_calls)
+  if (is_tag) {
+    add_tag_env <- sys.frame(which(tag_in_calls))
+    location <- add_tag_env$location %||% ""
+    if (location == "margin") is_tag <- FALSE
+  }
+
   grobs <- lapply(
     seq_along(label),
     build_grobs,
@@ -219,8 +247,8 @@ S7::method(element_grob, element_path) <- function(
       y = as.numeric(y),
       hjust = rep(hj, n),
       vjust = rep(vj, n),
-      width = rep(size, n),
-      height = rep(size, n),
+      width = if(is_tag) size else grid::unit(1, "npc"),
+      height = if(is_tag) size else grid::unit(1, "npc"),
       angle = rep(angle, n)
     ),
     is_theme_element = TRUE
@@ -229,7 +257,6 @@ S7::method(element_grob, element_path) <- function(
   class(grobs) <- "gList"
 
   grid::gTree(
-    gp = grid::gpar(),
     children = grobs,
     size = size,
     cl = "ggpath_element"
@@ -237,10 +264,14 @@ S7::method(element_grob, element_path) <- function(
 }
 
 #' @export
-grobHeight.ggpath_element <- function(x, ...) x$size
+grobHeight.ggpath_element <- function(x, ...) {
+  x$size
+}
 
 #' @export
-grobWidth.ggpath_element <- function(x, ...) x$size
+grobWidth.ggpath_element <- function(x, ...) {
+  x$size
+}
 
 S7::method(element_grob, element_raster) <- function(element, ...) {
   img <- try(reader_function(element@image_path), silent = TRUE)
