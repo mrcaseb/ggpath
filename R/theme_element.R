@@ -247,8 +247,8 @@ S7::method(element_grob, element_path) <- function(
       y = as.numeric(y),
       hjust = rep(hj, n),
       vjust = rep(vj, n),
-      width = if(is_tag) size else grid::unit(1, "npc"),
-      height = if(is_tag) size else grid::unit(1, "npc"),
+      width = if(is_tag) rep(size, n) else rep(grid::unit(1, "npc"), n),
+      height = if(is_tag) rep(size, n) else rep(grid::unit(1, "npc"), n),
       angle = rep(angle, n)
     ),
     is_theme_element = TRUE
