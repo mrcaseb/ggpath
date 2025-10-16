@@ -1,6 +1,6 @@
 ## Submission
 
-This is a patch release that fixes failing tests due to ggplot2 v4 release.
+This is a patch release that fixes a minor rendering issue with ggplot2 tags.
 
 ## R CMD check results
 
