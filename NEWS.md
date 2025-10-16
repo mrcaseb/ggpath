@@ -8,7 +8,7 @@ ggpath now requires ggplot2 v4! This package is intended to be a ggplot2 extensi
 and if ggplot2 version jumps make breaking changes, then it's best for the extension 
 to not try to be downwards compatible.
 
-* ggpath now requires R 4.1 because magick needs this R version. This also follows the [Tidyverse R version support rules](https://www.tidyverse.org/blog/2019/04/r-version-support/). (#14)
+* ggpath now requires R 4.1 because magick needs this R version. This also follows the [Tidyverse R version support rules](https://tidyverse.org/blog/2019/04/r-version-support/). (#14)
 * rewrite theme elements in S7 to fully work with ggplot2 v4.0. (#16)
 * remove ggplot2 downwards compatibility in `size` argument of `geom_*_lines()` functions as ggpath now requires ggplot2 v4.
 
