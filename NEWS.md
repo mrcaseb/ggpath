@@ -1,6 +1,6 @@
-# ggpath (development version)
+# ggpath 1.1.1
 
-* adjust how size is applied to theme elements to avoid huge margins around some images. 
+* adjust how size is applied to theme elements to avoid huge margins around some images. (#21)
 
 # ggpath 1.1.0
 
