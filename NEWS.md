@@ -1,3 +1,7 @@
+# ggpath (development version)
+
+* `element_path()` keeps image units in `image_size` while preserving the inherited numeric text size. Theme element constructors now initialize their declared parent objects.
+
 # ggpath 1.1.1
 
 * adjust how size is applied to theme elements to avoid huge margins around some images. (#21)
