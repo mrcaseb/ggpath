@@ -1,6 +1,6 @@
 # ggpath (development version)
 
-* `element_path()` keeps image units in `image_size` while preserving the inherited numeric text size. Theme element constructors now initialize their declared parent objects.
+* Updates for compatibility with S7 > 0.2.2. Image sizes are now stored in `image_size`; `size` retains the inherited text size.
 
 # ggpath 1.1.1
 
