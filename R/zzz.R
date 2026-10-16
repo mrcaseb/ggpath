@@ -1,7 +1,11 @@
 # nocov start
 .onLoad <- function(libname, pkgname){
 
-  S7::methods_register()
+  if ("S7_on_load" %in% getNamespaceExports("S7")) {
+    getExportedValue("S7", "S7_on_load")()
+  } else {
+    S7::methods_register()
+  }
 
   memoise_option <- getOption("ggpath.cache", default = "memory")
 
@@ -37,3 +41,13 @@
   if(memoise_option == "off") packageStartupMessage('Note: ggpath.cache is set to "off"')
 }
 # nocov end
+
+.onUnload <- function(...) {
+  if ("S7_on_unload" %in% getNamespaceExports("S7")) {
+    getExportedValue("S7", "S7_on_unload")()
+  }
+}
+
+if ("S7_on_build" %in% getNamespaceExports("S7")) {
+  getExportedValue("S7", "S7_on_build")()
+}

@@ -22,6 +22,8 @@
 #' @param angle The angle of the element as a numerical value between 0° and 360°.
 #' @param size The output grob size as a [grid::unit]. If given a numeric,
 #'  `cm` will be applied as unit.
+#'   Stored in the `image_size` property so the inherited text `size` property
+#'   retains the numeric type required by [ggplot2::element_text()].
 #' @param image_path A file path, url, raster object or bitmap array.
 #' See [magick::image_read()] for further information.
 #'
@@ -88,12 +90,12 @@
 #'
 NULL
 
-s7_unit_class <- S7::new_S3_class(class(grid::unit(1, "npc")))
+s7_unit_class <- S7::new_S3_class(c("unit", "unit_v2"))
 
 #' @export
 #' @rdname element_path
 element_path <- S7::new_class(
-  "element_path",
+  name = "element_path",
   parent = element_text,
   properties = list(
     alpha = S7::new_property(S7::class_numeric),
@@ -101,7 +103,7 @@ element_path <- S7::new_class(
     hjust = S7::new_property(S7::class_numeric),
     vjust = S7::new_property(S7::class_numeric),
     angle = S7::new_property(S7::class_numeric),
-    size = S7::new_property(S7::class_numeric | s7_unit_class)
+    image_size = S7::new_property(s7_unit_class)
   ),
   constructor = function(
     alpha = 1L,
@@ -112,32 +114,23 @@ element_path <- S7::new_class(
     angle = 0,
     size = grid::unit(0.5, "cm")
   ) {
-    obj <-
-      S7::new_object(
-        S7::S7_object(),
-        alpha = alpha,
-        colour = color %||% colour,
-        hjust = hjust,
-        vjust = vjust,
-        angle = angle,
-        size = if (grid::is.unit(size)) size else grid::unit(size, "cm"),
-        inherit.blank = FALSE
-      )
-    class(obj) <- c(
-      "ggpath::element_path",
-      "ggplot2::element_text",
-      "ggplot2::element",
-      "S7_object"
+    S7::new_object(
+      element_text(inherit.blank = FALSE),
+      alpha = alpha,
+      colour = color %||% colour,
+      hjust = hjust,
+      vjust = vjust,
+      angle = angle,
+      image_size = if (grid::is.unit(size)) size else grid::unit(size, "cm")
     )
-    obj
   }
 )
 
 #' @export
 #' @rdname element_path
 element_raster <- S7::new_class(
-  "element_raster",
-  parent = element,
+  name = "element_raster",
+  parent = ggplot2::element_rect,
   properties = list(
     image_path = S7::new_property(S7::class_character),
     x = S7::new_property(S7::class_numeric | s7_unit_class),
@@ -160,26 +153,18 @@ element_raster <- S7::new_class(
     vjust = 0.5,
     interpolate = TRUE
   ) {
-    obj <-
-      S7::new_object(
-        S7::S7_object(),
-        image_path = image_path,
-        x = x,
-        y = y,
-        width = width,
-        height = height,
-        just = just,
-        hjust = hjust,
-        vjust = vjust,
-        interpolate = interpolate
-      )
-    class(obj) <- c(
-      "ggpath::element_raster",
-      "ggplot2::element_rect",
-      "ggplot2::element",
-      "S7_object"
+    S7::new_object(
+      ggplot2::element_rect(inherit.blank = FALSE),
+      image_path = image_path,
+      x = x,
+      y = y,
+      width = width,
+      height = height,
+      just = just,
+      hjust = hjust,
+      vjust = vjust,
+      interpolate = interpolate
     )
-    obj
   }
 )
 
@@ -206,7 +191,7 @@ S7::method(element_grob, element_path) <- function(
   y <- y %||% rep(vj, n)
   alpha <- alpha %||% rep(element@alpha, n)
   colour <- colour %||% rep(element@colour, n)
-  size <- element@size %||% size
+  size <- element@image_size %||% size
 
   # This next code block is a stupid hack but I currently can't
   # find a better solution to an issue related to the plot.tag
@@ -293,7 +278,6 @@ S7::method(element_grob, element_raster) <- function(element, ...) {
     just = element@just,
     hjust = element@hjust,
     vjust = element@vjust,
-    interpolate = element@interpolate,
-    default.units = element@default.units
+    interpolate = element@interpolate
   )
 }

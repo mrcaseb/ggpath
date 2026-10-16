@@ -1,3 +1,7 @@
+# ggpath (development version)
+
+* Updates for compatibility with S7 > 0.2.2. Image sizes are now stored in `image_size`; `size` retains the inherited text size.
+
 # ggpath 1.1.1
 
 * adjust how size is applied to theme elements to avoid huge margins around some images. (#21)
