@@ -19,7 +19,7 @@ Imports:
     magick (>= 2.7.3),
     memoise (>= 2.0.0),
     rlang (>= 0.4.11),
-    S7 (>= 0.2.0)
+    S7 (>= 0.2.2)
 Suggests: 
     covr (>= 3.5.1),
     rsvg (>= 2.0),
