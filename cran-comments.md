@@ -1,6 +1,6 @@
 ## Submission
 
-This is a patch release that fixes a minor rendering issue with ggplot2 tags.
+This is a patch release for compatibility with S7 > 0.2.2.
 
 ## R CMD check results
 

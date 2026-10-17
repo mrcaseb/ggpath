@@ -140,5 +140,5 @@ ggplot(mtcars, aes(x = disp, y = mpg)) +
   theme_minimal()
 }
 \seealso{
-The underlying ggplot2 geoms \code{\link[ggplot2:geom_abline]{ggplot2::geom_hline()}} and \code{\link[ggplot2:geom_abline]{ggplot2::geom_vline()}}
+The underlying ggplot2 geoms \code{\link[ggplot2:geom_hline]{ggplot2::geom_hline()}} and \code{\link[ggplot2:geom_vline]{ggplot2::geom_vline()}}
 }
