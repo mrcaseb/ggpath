@@ -1,9 +1,12 @@
 # Changelog
 
-## ggpath (development version)
+## ggpath 1.1.2
+
+CRAN release: 2026-10-17
 
 - Updates for compatibility with S7 \> 0.2.2. Image sizes are now stored
   in `image_size`; `size` retains the inherited text size.
+  ([\#25](https://github.com/mrcaseb/ggpath/issues/25))
 
 ## ggpath 1.1.1
 

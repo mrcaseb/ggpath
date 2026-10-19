@@ -11,14 +11,6 @@ GeomFromPath
 GeomRefLines
 ```
 
-## Format
-
-An object of class `GeomFromPath` (inherits from `Geom`, `ggproto`,
-`gg`) of length 5.
-
-An object of class `GeomRefLines` (inherits from `Geom`, `ggproto`,
-`gg`) of length 5.
-
 ## See also
 
 Useful links:
@@ -32,3 +24,7 @@ Useful links:
 ## Author
 
 **Maintainer**: Sebastian Carl <mrcaseb@gmail.com> \[copyright holder\]
+
+Authors:
+
+- Sebastian Carl <mrcaseb@gmail.com> \[copyright holder\]
