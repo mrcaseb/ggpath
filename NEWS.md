@@ -1,6 +1,6 @@
-# ggpath (development version)
+# ggpath 1.1.2
 
-* Updates for compatibility with S7 > 0.2.2. Image sizes are now stored in `image_size`; `size` retains the inherited text size.
+* Updates for compatibility with S7 > 0.2.2. Image sizes are now stored in `image_size`; `size` retains the inherited text size. (#25)
 
 # ggpath 1.1.1
 

@@ -51,7 +51,7 @@ Stored in the \code{image_size} property so the inherited text \code{size} prope
 retains the numeric type required by \code{\link[ggplot2:element_text]{ggplot2::element_text()}}.}
 
 \item{image_path}{A file path, url, raster object or bitmap array.
-See \code{\link[magick:editing]{magick::image_read()}} for further information.}
+See \code{\link[magick:image_read]{magick::image_read()}} for further information.}
 
 \item{x}{A numeric vector or unit object specifying x-location.}
 
@@ -82,12 +82,12 @@ An S7 object of class \code{element}.
 \description{
 In conjunction with the \code{\link[ggplot2:theme]{ggplot2::theme()}} system, the \code{element_} functions
 specify the display of how non-data components of a ggplot are drawn. Both
-functions call \code{\link[magick:editing]{magick::image_read()}} to process image files from valid image
+functions call \code{\link[magick:image_read]{magick::image_read()}} to process image files from valid image
 URLs, local paths, raster objects, or bitmap arrays.
 \itemize{
-\item \code{element_path()}: draws images as replacement for \code{\link[ggplot2:element]{ggplot2::element_text()}}.
+\item \code{element_path()}: draws images as replacement for \code{\link[ggplot2:element_text]{ggplot2::element_text()}}.
 Use this to replace text with images.
-\item \code{element_raster()}: draws images as replacement for \code{\link[ggplot2:element]{ggplot2::element_rect()}}.
+\item \code{element_raster()}: draws images as replacement for \code{\link[ggplot2:element_rect]{ggplot2::element_rect()}}.
 Use this to put images in plot background.
 }
 }
@@ -95,15 +95,15 @@ Use this to put images in plot background.
 To be able to use the functions correctly, a basic understanding of how they
 work is required.
 
-\strong{\code{element_path()}} can be applied wherever \code{\link[ggplot2:element]{ggplot2::element_text()}} is
+\strong{\code{element_path()}} can be applied wherever \code{\link[ggplot2:element_text]{ggplot2::element_text()}} is
 usually used. It replaces text with an image if the text is a valid image
 file location or data.
 
-\strong{\code{element_raster()}} can be applied wherever \code{\link[ggplot2:element]{ggplot2::element_rect()}} is
-usually used. A path in the sense of \code{\link[magick:editing]{magick::image_read()}} must be explicitly
+\strong{\code{element_raster()}} can be applied wherever \code{\link[ggplot2:element_rect]{ggplot2::element_rect()}} is
+usually used. A path in the sense of \code{\link[magick:image_read]{magick::image_read()}} must be explicitly
 specified here because it cannot read plot data. It is designed exclusively
 for inserting an image into the background of a plot and calls
-\code{\link[grid:grid.raster]{grid::rasterGrob()}} internally.
+\code{\link[grid:rasterGrob]{grid::rasterGrob()}} internally.
 Neither \code{width} nor \code{height} need to be specified, in which case, the aspect
 ratio of the image is preserved. If both \code{width} and \code{height} are specified,
 it is likely that the image will be distorted.
@@ -150,5 +150,5 @@ ggplot(plot_data, aes(x = x, y = y)) +
   )
 }
 \seealso{
-\code{\link[=geom_from_path]{geom_from_path()}}, \code{\link[grid:grid.raster]{grid::rasterGrob()}}, \code{\link[grid:unit]{grid::unit()}}, \code{\link[magick:editing]{magick::image_read()}}
+\code{\link[=geom_from_path]{geom_from_path()}}, \code{\link[grid:rasterGrob]{grid::rasterGrob()}}, \code{\link[grid:unit]{grid::unit()}}, \code{\link[magick:image_read]{magick::image_read()}}
 }
