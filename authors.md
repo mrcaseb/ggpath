@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/mrcaseb/ggpath/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/mrcaseb/ggpath/blob/v1.1.2/DESCRIPTION)
 
 Carl S (2026). *ggpath: Robust Image Rendering Support for 'ggplot2'*. R
 package version 1.1.2, <https://github.com/mrcaseb/ggpath>.
